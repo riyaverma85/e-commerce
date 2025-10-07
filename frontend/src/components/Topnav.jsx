@@ -1,7 +1,7 @@
 import "../css/navbar.css";
 import { FaCartArrowDown } from "react-icons/fa";
 import { IoPersonCircle } from "react-icons/io5";
-import logo from "../images/logo.png";
+import logo from "../images/logo2.jpg";
 
 const Topnav = () => {
   return (

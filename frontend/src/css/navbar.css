@@ -5,6 +5,11 @@
   box-sizing: border-box;
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
+.logo img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
 .navbar {
   display: flex;
   justify-content: space-between;
