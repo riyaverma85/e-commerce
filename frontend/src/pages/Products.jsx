@@ -8,6 +8,7 @@ import product4 from "../images/product-9.webp";
 import product5 from "../images/product-10.webp";
 import product6 from "../images/product-11.webp";
 
+// Vegetables image
 import product7 from "../images/product-6.jpg";
 import product8 from "../images/product-5.jpg";
 import product9 from "../images/carrot.gif";
@@ -15,7 +16,14 @@ import product10 from "../images/spanich.webp";
 import product11 from "../images/cauliflower.webp";
 import product12 from "../images/capsicum.webp";
 
+// Dairy image
+import product13 from "../images/milk.webp";
+import product14 from "../images/butter,webp";
+import product15 from "../images/cheese.webp";
+import product16 from "../images/yogurt.webp";
+import product17 from "../images/paneer.webp";
 
+import product12 from "../images/capsicum.webp";
 const productsData = [
   {
     category: "Fruits",
@@ -42,11 +50,11 @@ const productsData = [
   {
     category: "Dairy",
     items: [
-      { name: "Milk", image: "/images/products/milk.jpg", priceNew: "$5", priceOld: "$7" },
-      { name: "Butter", image: "/images/products/butter.jpg", priceNew: "$8", priceOld: "$10" },
-      { name: "Cheese", image: "/images/products/cheese.jpg", priceNew: "$12", priceOld: "$15" },
-      { name: "Yogurt", image: "/images/products/yogurt.jpg", priceNew: "$6", priceOld: "$8" },
-      { name: "Paneer", image: "/images/products/paneer.jpg", priceNew: "$10", priceOld: "$14" },
+      { name: "Milk", image: product13, priceNew: "$5", priceOld: "$7" },
+      { name: "Butter", image: product14, priceNew: "$8", priceOld: "$10" },
+      { name: "Cheese", image: product15, priceNew: "$12", priceOld: "$15" },
+      { name: "Yogurt", image: product16, priceNew: "$6", priceOld: "$8" },
+      { name: "Paneer", image: product17, priceNew: "$10", priceOld: "$14" },
     ],
   },
   {
