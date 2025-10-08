@@ -1,6 +1,6 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
-import "../css/topnav.css";
+import "../css/navbar.css";
 import { Navbar, Nav, Container } from "react-bootstrap";
 
 const TopNav = () => {
