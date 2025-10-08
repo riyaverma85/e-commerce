@@ -38,10 +38,8 @@
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 25px;
+  gap: 20px;
 }
-
-
 .nav-icons {
   display: flex;
   gap: 20px;
@@ -57,6 +55,7 @@
   transform: scale(1.2);
   color: #c8f77a;
 }
+
 .nav-links .nav-link {
   color: white !important;
   font-weight: 500;

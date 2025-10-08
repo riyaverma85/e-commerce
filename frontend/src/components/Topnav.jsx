@@ -9,19 +9,19 @@ const Topnav = () => {
   return (
     <Navbar expand="lg" className="navbar shadow-sm">
       <Container fluid className="d-flex align-items-center justify-content-between">
-        {/* Logo */}
+       
         <Navbar.Brand href="#home" className="logo d-flex align-items-center">
           <img src={logo} alt="OrganicMart Logo" />
         </Navbar.Brand>
 
-        {/* Toggle for mobile */}
+       
         <Navbar.Toggle aria-controls="organic-navbar" className="bg-light" />
 
-        {/* Collapsible content */}
+       
         <Navbar.Collapse id="organic-navbar" className="justify-content-end">
-          {/* Navigation Links */}
+          
           <Nav className="nav-links d-flex align-items-center mx-auto">
-            <Nav.Link as={Link} to="/home">Home</Nav.Link>
+            <Nav.Link as={Link} to="/home" className="home">Home</Nav.Link>
             <Nav.Link as={Link} to="/shop">Shop</Nav.Link>
             <Nav.Link as={Link} to="/about">About</Nav.Link>
             <Nav.Link as={Link} to="/blog">Blog</Nav.Link>
