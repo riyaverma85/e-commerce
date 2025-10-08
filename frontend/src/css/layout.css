@@ -5,6 +5,6 @@
     box-sizing: border-box;
 }
 #outlet{
-    height: 100vh;
+    height: auto;
     margin: 2rem;
 }
