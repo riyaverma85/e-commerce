@@ -1,5 +1,6 @@
 import React from "react";
 import "../css/productss.css";
+import "../css/shop.css";
 //  Fruits image
 import product1 from "../images/product-2.jpg";
 import product2 from "../images/product-4.jpg";
@@ -23,14 +24,25 @@ import product15 from "../images/cheese.webp";
 import product16 from "../images/yogurt.webp";
 import product17 from "../images/panner.webp";
 
-// grains image
+// Grains & Pulses image
 import product18 from "../images/rice.webp";
 import product19 from "../images/wheat.webp";
 import product20 from "../images/Lentils.webp";
 import product21 from "../images/Oats.webp";
 import product22 from "../images/Chana.webp";
 
+//Others image
+import product23 from "../images/honey.webp";
+import product24 from "../images/Olive Oil.webp";
+import product25 from "../images/Organic Tea.webp";
+import product26 from "../images/Organic Coffee.webp";
+import product27 from "../images/Turmeric.webp";
+import product28 from "../images/Cinnamon.webp";
 
+import img1 from "../images/fruitss.webp";
+import img2 from "../images/vegitables.webp";
+import img3 from "../images/dairy.webp";
+import img4 from "../images/others.webp";
 
 const productsData = [
   {
@@ -78,18 +90,73 @@ const productsData = [
   {
     category: "Others",
     items: [
-      { name: "Honey", image: "/images/products/honey.jpg", priceNew: "$12", priceOld: "$18" },
-      { name: "Olive Oil", image: "/images/products/olive-oil.jpg", priceNew: "$20", priceOld: "$25" },
-      { name: "Organic Tea", image: "/images/products/tea.jpg", priceNew: "$10", priceOld: "$15" },
-      { name: "Organic Coffee", image: "/images/products/coffee.jpg", priceNew: "$15", priceOld: "$20" },
-      { name: "Turmeric", image: "/images/products/turmeric.jpg", priceNew: "$8", priceOld: "$12" },
-      { name: "Cinnamon", image: "/images/products/cinnamon.jpg", priceNew: "$7", priceOld: "$10" },
+      { name: "Honey", image: product23, priceNew: "$12", priceOld: "$18" },
+      { name: "Olive Oil", image: product24, priceNew: "$20", priceOld: "$25" },
+      { name: "Organic Tea", image: product25, priceNew: "$10", priceOld: "$15" },
+      { name: "Organic Coffee", image: product26, priceNew: "$15", priceOld: "$20" },
+      { name: "Turmeric", image: product27, priceNew: "$8", priceOld: "$12" },
+      { name: "Cinnamon", image: product28, priceNew: "$7", priceOld: "$10" },
     ],
   },
 ];
 
-const Products = () => {
+const Shop= () => {
   return (
+    <>
+    <section className="shop-content-section">
+      <div className="container">
+        {/* Main Banner */}
+        <div className="shop-banner">
+          <h1>🌿 Explore Our Organic Products</h1>
+          <p>Fresh, healthy, and chemical-free products straight from local farms to your doorstep.</p>
+          <button className="shop-btn">Shop Now</button>
+        </div>
+
+        {/* Featured Categories */}
+        <div className="categories-section">
+          <h2>Shop by Category</h2>
+          <div className="categories-row">
+            <div className="category-box">
+              <div className="category-img" style={{ backgroundImage: `url(${img1})` }}></div>
+              <h3>Fruits</h3>
+            </div>
+            <div className="category-box">
+              <div className="category-img" style={{ backgroundImage: `url(${img2})` }}></div>
+              <h3>Vegetables</h3>
+            </div>
+            <div className="category-box">
+              <div className="category-img" style={{ backgroundImage: `url(${img3})` }}></div>
+              <h3>Dairy</h3>
+            </div>
+            <div className="category-box">
+              <div className="category-img" style={{ backgroundImage: `url(${img4})` }}></div>
+              <h3>Others</h3>
+            </div>
+          </div>
+        </div>
+
+        {/* Featured Products */}
+        <div className="featured-section">
+          <h2>Featured Products</h2>
+          <p>Our top picks of fresh organic items for you today.</p>
+          <ul className="featured-list">
+            <li>Fresh Organic Apples - $19</li>
+            <li>Bananas from Local Farms - $10</li>
+            <li>Mangoes (Seasonal) - $20</li>
+            <li>Organic Tomatoes - $15</li>
+            <li>Fresh Milk - $5</li>
+          </ul>
+        </div>
+
+        {/* Call to Action */}
+        <div className="shop-cta">
+          <h2>Ready to Go Organic?</h2>
+          <p>Shop the freshest and healthiest products for your family today!</p>
+          <button className="shop-btn">Browse Products</button>
+        </div>
+      </div>
+    </section>
+
     <section className="products-section">
       <div className="container">
         {productsData.map((category, index) => (
@@ -123,7 +190,8 @@ const Products = () => {
         </div>
       </div>
     </section>
+  </>
   );
 };
 
-export default Products;
+export default Shop;

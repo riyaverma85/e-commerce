@@ -12,7 +12,6 @@ import product3 from "../images/product-3.jpg";
 import product4 from "../images/product-4.jpg";
 import product5 from "../images/product-5.jpg";
 import product6 from "../images/product-7.jpg";
-import product7 from "../images/product-8.jpg";
 
 const Home = () => {
   return (
@@ -257,23 +256,7 @@ const Home = () => {
                   </div>
                 </div>
       
-                <div className="product-card">
-                  <div className="product-img">
-                    <img src={product7} alt="Product" />
-                    <span className="product-badge">New</span>
-                  </div>
-                  <div className="product-content">
-                    <h4>Fresh Banana</h4>
-                    <div className="price">
-                      <span className="new-price">$30.00</span>
-                      <span className="old-price">$40.00</span>
-                    </div>
-                    <div className="product-buttons">
-                      <button className="view-btn">View Detail</button>
-                      <button className="cart-btn">Add to Cart</button>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
       
               {/* Centered “View More” button */}
