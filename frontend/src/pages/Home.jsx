@@ -5,6 +5,7 @@ import Upperimage from "../images/fruits.jpg";
 import "../css/home.css";
 import { FaLeaf, FaSeedling, FaAppleAlt } from "react-icons/fa";
 
+
 const Home = () => {
   return (
     <>
@@ -125,6 +126,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+     
     </>
   );
 };
