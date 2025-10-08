@@ -2,7 +2,7 @@
 import Carousel from "react-bootstrap/Carousel";
 import ban1 from "../images/carousel-1.jpg";
 import ban2 from "../images/carousel-2.jpg";
-// import ban3 from "../images/carousel-3.jpg";
+import Upperimage from "../images/fruits.jpg";
 import "../css/home.css";
 import { FaLeaf, FaSeedling, FaAppleAlt } from "react-icons/fa";
 
@@ -68,7 +68,7 @@ const Home = () => {
             </ul>
           </div>
           <div className="upper-image">
-            <img src={UpperImage} alt="Organic Vegetables" />
+            <img src={Upperimage} alt="Organic Vegetables" />
           </div>
         </div>
       </section>
