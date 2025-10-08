@@ -52,7 +52,7 @@ const Home = () => {
               <li>✔️ Hand-picked with care</li>
               <li>✔️ Eco-friendly packaging</li>
             </ul>
-            <button className="upper-btn">Read More</button>
+            <button className="btnn">Read More</button>
           </div>
           <div className="upper-image">
             <img src={Upperimage} alt="Organic Vegetables" />
