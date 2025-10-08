@@ -4,7 +4,15 @@ import ban2 from "../images/carousel-2.jpg";
 import Upperimage from "../images/fruits.jpg";
 import "../css/home.css";
 import { FaLeaf, FaSeedling, FaAppleAlt } from "react-icons/fa";
-
+//  Product Section
+import "../css/products.css";
+import product1 from "../images/product-1.jpg";
+import product2 from "../images/product-2.jpg";
+import product3 from "../images/product-3.jpg";
+import product4 from "../images/product-4.jpg";
+import product5 from "../images/product-5.jpg";
+import product6 from "../images/product-7.jpg";
+import product7 from "../images/product-8.jpg";
 
 const Home = () => {
   return (
