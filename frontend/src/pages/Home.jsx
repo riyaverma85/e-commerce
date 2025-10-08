@@ -42,13 +42,7 @@ const Home = () => {
 
     
   
-      {/* Parallax Banner */}
-      <section className="parallax-banner">
-        <div className="banner-overlay">
-          <h1>🌱 Best Organic Fruits & Vegetables</h1>
-          <p>Pure, fresh, and healthy products straight from the farm to your doorstep</p>
-        </div>
-      </section>
+      
 
       
       {/* Upper Section: Split Image + Content */}
@@ -72,7 +66,13 @@ const Home = () => {
           </div>
         </div>
       </section>
-
+      {/* Parallax Banner */}
+      <section className="parallax-banner">
+        <div className="banner-overlay">
+          <h1>🌱 Best Organic Fruits & Vegetables</h1>
+          <p>Pure, fresh, and healthy products straight from the farm to your doorstep</p>
+        </div>
+      </section>
       {/* Features Section with Background Image */}
       <section className="organic-section features-bg" id="features">
         <div className="organic-container">
