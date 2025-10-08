@@ -1,4 +1,19 @@
-/* 🌿 Organic Carousel Styling */
+/* 🌿 General Styling */
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: #2e7d32;
+  margin: 0;
+  background-color: #ffffff;
+}
+
+/* ==============================
+   🌿 ORGANIC CAROUSEL SECTION
+================================*/
 .organic-carousel img {
   height: 90vh;
   object-fit: cover;
@@ -6,39 +21,29 @@
 }
 
 .carousel-caption {
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.5);
   border-radius: 15px;
   padding: 25px 35px;
-  backdrop-filter: blur(6px);
-  transition: all 0.4s ease-in-out;
-}
-
-.carousel-caption:hover {
-  background: rgba(0, 0, 0, 0.6);
-  transform: translateY(-5px);
+  backdrop-filter: blur(5px);
 }
 
 .carousel-caption h3 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #c8f77a;
-  text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.8);
-  font-family: 'Poppins', sans-serif;
+  color: #b2ff59;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .carousel-caption p {
   font-size: 1.1rem;
   color: #fff;
-  margin-top: 10px;
-  font-family: 'Open Sans', sans-serif;
 }
 
 .carousel-btn {
   margin-top: 15px;
-  background: linear-gradient(90deg, #66bb6a, #43a047);
+  background: linear-gradient(90deg, #66bb6a, #388e3c);
   border: none;
   color: white;
-  font-size: 1rem;
   font-weight: 600;
   padding: 10px 25px;
   border-radius: 30px;
@@ -47,141 +52,46 @@
 }
 
 .carousel-btn:hover {
+  transform: scale(1.08);
   background: linear-gradient(90deg, #81c784, #2e7d32);
-  transform: scale(1.1);
   box-shadow: 0 4px 15px rgba(72, 239, 128, 0.4);
 }
 
-/* 🌼 Carousel Control Buttons */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  background-size: 60%, 60%;
-  transition: all 0.3s ease;
+/* ==============================
+   🥬 UPPER SECTION
+================================*/
+.organic-upper {
+  background: #f9fff5;
+  padding: 80px 20px;
 }
 
-.carousel-control-prev-icon:hover,
-.carousel-control-next-icon:hover {
-  background-color: #4caf50;
-  transform: scale(1.2);
-}
-
-/* 📱 Responsive Styles */
-@media (max-width: 992px) {
-  .organic-carousel img {
-    height: 70vh;
-  }
-  .carousel-caption h3 {
-    font-size: 1.8rem;
-  }
-  .carousel-caption p {
-    font-size: 1rem;
-  }
-  .carousel-btn {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .organic-carousel img {
-    height: 60vh;
-  }
-  .carousel-caption {
-    padding: 15px 20px;
-  }
-  .carousel-caption h3 {
-    font-size: 1.6rem;
-  }
-  .carousel-caption p {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .organic-carousel img {
-    height: 50vh;
-  }
-  .carousel-caption h3 {
-    font-size: 1.3rem;
-  }
-  .carousel-caption p {
-    font-size: 0.8rem;
-  }
-  .carousel-btn {
-    padding: 8px 18px;
-  }
-}
-/* Parallax Banner */
-.parallax-banner {
-  background-image: url('https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=1350&q=80'); /* replace with your fruit/veg image */
-  height: 400px;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
+.upper-container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.banner-overlay {
-  background-color: rgba(0, 0, 0, 0.45);
-  padding: 40px;
-  border-radius: 15px;
-  color: #fff;
-}
-
-.banner-overlay h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-.banner-overlay p {
-  font-size: 1.2rem;
-}
-
-/* Organic Section (as before) */
-.organic-section {
-  background: #f1f8e9;
-  padding: 60px 20px;
-  font-family: "Poppins", sans-serif;
-  color: #2e7d32;
-}
-
-.organic-container {
+  justify-content: space-between;
+  flex-wrap: wrap;
   max-width: 1200px;
   margin: auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  align-items: start;
   gap: 40px;
 }
 
-/* Text Section */
-.organic-text p {
-  font-size: 1rem;
-  color: #33691e;
-  line-height: 1.7;
-  margin-bottom: 20px;
+.upper-text h2 {
+  font-size: 2.4rem;
+  color: #1b5e20;
 }
 
-.organic-list {
-  list-style: none;
-  padding: 0;
+.upper-text p {
+  color: #33691e;
+  line-height: 1.7;
+  margin: 15px 0;
 }
 
 .organic-list li {
-  margin-bottom: 10px;
-  font-size: 1rem;
   background: #e8f5e9;
-  padding: 10px;
+  padding: 10px 15px;
   border-radius: 10px;
-  transition: transform 0.3s ease;
+  margin-bottom: 8px;
+  transition: 0.3s;
 }
 
 .organic-list li:hover {
@@ -189,124 +99,19 @@
   background: #c8e6c9;
 }
 
-/* Features Section */
-.features-section {
-  text-align: center;
+.upper-btn {
+  background: #2e7d32;
+  color: #fff;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
-.features-section h3 {
-  font-size: 1.8rem;
-  color: #1b5e20;
-  margin-bottom: 10px;
-}
-
-.features-section p {
-  color: #558b2f;
-  margin-bottom: 30px;
-  line-height: 1.6;
-}
-
-/* Feature Cards */
-.feature-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.feature-card {
-  background: white;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(46, 125, 50, 0.2);
-  text-align: center;
-  width: 280px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.feature-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 6px 18px rgba(46, 125, 50, 0.3);
-}
-
-.feature-icon {
-  font-size: 2.5rem;
-  color: #388e3c;
-  margin-bottom: 10px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .feature-cards {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .organic-text,
-  .features-section {
-    text-align: center;
-  }
-
-  .parallax-banner {
-    height: 300px;
-  }
-
-  .banner-overlay h1 {
-    font-size: 2rem;
-  }
-
-  .banner-overlay p {
-    font-size: 1rem;
-  }
-}
-/* Upper Section: Image + Content */
-.organic-upper {
-  background: #f1f8e9;
-  padding: 60px 20px;
-}
-
-.upper-container {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  max-width: 1200px;
-  margin: auto;
-  flex-wrap: wrap;
-}
-
-.upper-text {
-  flex: 1;
-}
-
-.upper-text h2 {
-  font-size: 2.2rem;
-  color: #1b5e20;
-  margin-bottom: 15px;
-}
-
-.upper-text p {
-  font-size: 1rem;
-  color: #33691e;
-  line-height: 1.7;
-  margin-bottom: 20px;
-}
-
-.upper-text .organic-list li {
-  margin-bottom: 10px;
-  font-size: 1rem;
-  background: #e8f5e9;
-  padding: 10px;
-  border-radius: 10px;
-  transition: transform 0.3s ease;
-}
-
-.upper-text .organic-list li:hover {
-  transform: translateX(8px);
-  background: #c8e6c9;
-}
-
-.upper-image {
-  flex: 1;
+.upper-btn:hover {
+  background: #43a047;
+  transform: translateY(-3px);
 }
 
 .upper-image img {
@@ -315,101 +120,117 @@
   box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3);
 }
 
-/* Features Section with Background Image */
-.features-bg {
-  background-image: url('https://images.unsplash.com/photo-1582281298056-7d15f4fa9e7e?auto=format&fit=crop&w=1350&q=80'); /* Replace with your image */
-  background-size: cover;
+/* ==============================
+   🍃 PARALLAX BANNER
+================================*/
+.parallax-banner {
+  background-image: url("https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=1350&q=80");
+  height: 400px;
+  background-attachment: fixed;
   background-position: center;
-  background-repeat: no-repeat;
-  color: #fff;
-  padding: 60px 20px;
-  border-radius: 15px;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-.features-bg .features-section {
+.banner-overlay {
+  background: rgba(0, 0, 0, 0.55);
+  padding: 50px 40px;
+  border-radius: 15px;
+  color: white;
   text-align: center;
-  background: rgba(0, 0, 0, 0.5); /* dark overlay for readability */
-  padding: 40px;
-  border-radius: 15px;
 }
 
-.features-section h3 {
-  font-size: 2rem;
-  margin-bottom: 15px;
+.banner-overlay h1 {
+  font-size: 2.5rem;
   color: #c8e6c9;
 }
 
-.features-section p {
-  font-size: 1rem;
-  margin-bottom: 30px;
-  color: #090909;
+.banner-overlay p {
+  font-size: 1.1rem;
+  margin-top: 10px;
 }
 
-/* Feature Cards */
+/* ==============================
+   🌻 FEATURES SECTION
+================================*/
+.features-bg {
+  background-image: url("https://images.unsplash.com/photo-1582281298056-7d15f4fa9e7e?auto=format&fit=crop&w=1350&q=80");
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  padding: 80px 20px;
+}
+
+.features-section {
+  background: rgba(0, 0, 0, 0.55);
+  padding: 50px;
+  border-radius: 15px;
+  text-align: center;
+}
+
 .feature-cards {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 30px;
 }
 
 .feature-card {
-  background: rgba(255, 255, 255, 0.9);
+  background: #fff;
   color: #2e7d32;
-  padding: 25px;
-  border-radius: 15px;
-  text-align: center;
+  padding: 30px;
   width: 280px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 15px;
+  transition: 0.3s;
+  box-shadow: 0 4px 10px rgba(46, 125, 50, 0.2);
 }
 
 .feature-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 6px 18px rgba(46, 125, 50, 0.3);
+  box-shadow: 0 8px 20px rgba(46, 125, 50, 0.3);
 }
 
 .feature-icon {
   font-size: 2.5rem;
-  color: #388e3c;
-  margin-bottom: 10px;
+  color: #43a047;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .upper-container {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .upper-image img {
-    max-width: 90%;
-    margin: auto;
-  }
-
-  .feature-cards {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .features-section {
-    padding: 30px;
-  }
+.feature-card button {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  margin-top: 10px;
+  font-weight: 600;
+  transition: 0.3s;
 }
+
+.feature-card button:hover {
+  background: #43a047;
+}
+
+/* ==============================
+   🏡 VISIT OUR FIRM
+================================*/
 .visit-firm {
   background: linear-gradient(135deg, #66bb6a, #2e7d32);
-  padding: 60px 20px;
   color: #fff;
-  font-family: "Poppins", sans-serif;
+  padding: 80px 20px;
 }
 
 .visit-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: auto;
-  gap: 20px;
   flex-wrap: wrap;
+  gap: 30px;
 }
 
 .visit-text {
@@ -421,11 +242,6 @@
   margin-bottom: 15px;
 }
 
-.visit-text p {
-  font-size: 1rem;
-  line-height: 1.7;
-}
-
 .visit-button {
   flex: 1;
   display: flex;
@@ -433,29 +249,49 @@
 }
 
 .visit-button .btn {
-  background-color: #fff;
+  background: #fff;
   color: #2e7d32;
-  padding: 15px 30px;
-  border-radius: 50px;
-  font-weight: bold;
+  padding: 14px 30px;
+  border-radius: 30px;
   text-decoration: none;
-  transition: transform 0.3s, background-color 0.3s;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
 .visit-button .btn:hover {
-  background-color: #c8e6c9;
-  transform: translateY(-5px);
+  background: #c8e6c9;
+  transform: translateY(-3px);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* ==============================
+   📱 RESPONSIVE DESIGN
+================================*/
+@media (max-width: 992px) {
+  .carousel-caption h3 {
+    font-size: 1.8rem;
+  }
+  .upper-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .feature-cards {
+    flex-direction: column;
+    align-items: center;
+  }
   .visit-container {
     flex-direction: column;
     text-align: center;
   }
-
   .visit-button {
     justify-content: center;
-    margin-top: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .banner-overlay h1 {
+    font-size: 1.8rem;
+  }
+  .carousel-btn {
+    padding: 8px 20px;
   }
 }
