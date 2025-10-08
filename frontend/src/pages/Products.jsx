@@ -23,6 +23,14 @@ import product15 from "../images/cheese.webp";
 import product16 from "../images/yogurt.webp";
 import product17 from "../images/panner.webp";
 
+// grains image
+import product18 from "../images/rice.webp";
+import product19 from "../images/wheat.webp";
+import product20 from "../images/Lentils.webp";
+import product21 from "../images/Oats.webp";
+import product22 from "../images/Chana.webp";
+
+
 
 const productsData = [
   {
@@ -60,11 +68,11 @@ const productsData = [
   {
     category: "Grains & Pulses",
     items: [
-      { name: "Rice", image: "/images/products/rice.jpg", priceNew: "$20", priceOld: "$25" },
-      { name: "Wheat", image: "/images/products/wheat.jpg", priceNew: "$18", priceOld: "$22" },
-      { name: "Lentils", image: "/images/products/lentils.jpg", priceNew: "$15", priceOld: "$20" },
-      { name: "Oats", image: "/images/products/oats.jpg", priceNew: "$12", priceOld: "$16" },
-      { name: "Chana", image: "/images/products/chana.jpg", priceNew: "$10", priceOld: "$14" },
+      { name: "Rice", image: product18, priceNew: "$20", priceOld: "$25" },
+      { name: "Wheat", image: product19, priceNew: "$18", priceOld: "$22" },
+      { name: "Lentils", image: product20, priceNew: "$15", priceOld: "$20" },
+      { name: "Oats", image: product21, priceNew: "$12", priceOld: "$16" },
+      { name: "Chana", image: product22, priceNew: "$10", priceOld: "$14" },
     ],
   },
   {
