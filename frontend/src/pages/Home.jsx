@@ -85,7 +85,7 @@ const Home = () => {
                 <p>
                   We follow eco-friendly farming methods to protect nature and ensure purity.
                 </p>
-                <button>Read More</button>
+                <button className="btnn">Read More</button>
               </div>
 
               <div className="feature-card">
@@ -94,7 +94,7 @@ const Home = () => {
                 <p>
                   Every product is certified organic and sourced from trusted farms only.
                 </p>
-                <button>Read More</button>
+                <button className="btnn">Read More</button>
               </div>
 
               <div className="feature-card">
@@ -103,7 +103,7 @@ const Home = () => {
                 <p>
                   Our products are 100% chemical-free and safe for you and your family.
                 </p>
-                <button>Read More</button>
+                <button className="btnn">Read More</button>
               </div>
             </div>
           </div>
