@@ -18,12 +18,12 @@ import product12 from "../images/capsicum.webp";
 
 // Dairy image
 import product13 from "../images/milk.webp";
-import product14 from "../images/butter,webp";
+import product14 from "../images/butter.webp";
 import product15 from "../images/cheese.webp";
 import product16 from "../images/yogurt.webp";
-import product17 from "../images/paneer.webp";
+import product17 from "../images/panner.webp";
 
-import product12 from "../images/capsicum.webp";
+
 const productsData = [
   {
     category: "Fruits",
