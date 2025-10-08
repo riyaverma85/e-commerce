@@ -1,13 +1,116 @@
-/* Carousel */
-.carousel-item img {
+/* 🌿 Organic Carousel Styling */
+.organic-carousel img {
   height: 90vh;
   object-fit: cover;
   filter: brightness(75%);
 }
-.carousel-caption h2 {
-  font-size: 2.5rem;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 15px;
+  padding: 25px 35px;
+  backdrop-filter: blur(6px);
+  transition: all 0.4s ease-in-out;
 }
+
+.carousel-caption:hover {
+  background: rgba(0, 0, 0, 0.6);
+  transform: translateY(-5px);
+}
+
+.carousel-caption h3 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #c8f77a;
+  text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.8);
+  font-family: 'Poppins', sans-serif;
+}
+
 .carousel-caption p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  color: #fff;
+  margin-top: 10px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.carousel-btn {
+  margin-top: 15px;
+  background: linear-gradient(90deg, #66bb6a, #43a047);
+  border: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.carousel-btn:hover {
+  background: linear-gradient(90deg, #81c784, #2e7d32);
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(72, 239, 128, 0.4);
+}
+
+/* 🌼 Carousel Control Buttons */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  background-size: 60%, 60%;
+  transition: all 0.3s ease;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+  background-color: #4caf50;
+  transform: scale(1.2);
+}
+
+/* 📱 Responsive Styles */
+@media (max-width: 992px) {
+  .organic-carousel img {
+    height: 70vh;
+  }
+  .carousel-caption h3 {
+    font-size: 1.8rem;
+  }
+  .carousel-caption p {
+    font-size: 1rem;
+  }
+  .carousel-btn {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .organic-carousel img {
+    height: 60vh;
+  }
+  .carousel-caption {
+    padding: 15px 20px;
+  }
+  .carousel-caption h3 {
+    font-size: 1.6rem;
+  }
+  .carousel-caption p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .organic-carousel img {
+    height: 50vh;
+  }
+  .carousel-caption h3 {
+    font-size: 1.3rem;
+  }
+  .carousel-caption p {
+    font-size: 0.8rem;
+  }
+  .carousel-btn {
+    padding: 8px 18px;
+  }
 }
