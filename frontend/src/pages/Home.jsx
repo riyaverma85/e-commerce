@@ -52,7 +52,7 @@ const Home = () => {
               <li>✔️ Hand-picked with care</li>
               <li>✔️ Eco-friendly packaging</li>
             </ul>
-            <button className="btnn">Read More</button>
+            <button className="btnn2">Read More</button>
           </div>
           <div className="upper-image">
             <img src={Upperimage} alt="Organic Vegetables" />
@@ -85,7 +85,7 @@ const Home = () => {
                 <p>
                   We follow eco-friendly farming methods to protect nature and ensure purity.
                 </p>
-                <button className="btnn">Read More</button>
+                <button className="btnn1">Read More</button>
               </div>
 
               <div className="feature-card">

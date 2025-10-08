@@ -147,7 +147,7 @@
 
 /* Organic Section (as before) */
 .organic-section {
-  background: #f1f8e9;
+  background: white;
   padding: 60px 20px;
   font-family: "Poppins", sans-serif;
   color: #2e7d32;
@@ -261,7 +261,7 @@
 }
 /* Upper Section: Image + Content */
 .organic-upper {
-  background: #f1f8e9;
+  background: white;
   padding: 60px 20px;
 }
 
@@ -328,7 +328,7 @@
 
 .features-bg .features-section {
   text-align: center;
-  background: rgba(0, 0, 0, 0.5); /* dark overlay for readability */
+  background: whitesmoke; /* dark overlay for readability */
   padding: 40px;
   border-radius: 15px;
 }
@@ -336,7 +336,7 @@
 .features-section h3 {
   font-size: 2rem;
   margin-bottom: 15px;
-  color: #c8e6c9;
+  color: #040404;
 }
 
 .features-section p {
@@ -373,8 +373,27 @@
   color: #388e3c;
   margin-bottom: 10px;
 }
+.btnn2{
+  background-color: #18a13a;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+}
 .btnn{
-  background-color: #106124;
+  color: #33691e;
+  border: 2px solid #33691e;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+}
+.btnn1{
+  background-color: #054515;
   color: #fff;
   border: none;
   padding: 10px 25px;
@@ -383,11 +402,19 @@
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s;
 }
-
-
+.btnn1:hover {
+  background-color: #054515;
+  color: #fff;
+  transform: scale(1.05);
+}
 .btnn:hover {
   background-color: #054515;
-  
+  color: #fff;
+  transform: scale(1.05);
+}
+.btnn2:hover {
+  background-color: #054515;
+  color: #fff;
   transform: scale(1.05);
 }
 /* Responsive */
