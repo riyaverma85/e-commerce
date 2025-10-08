@@ -1,5 +1,5 @@
 
-import Carousel from "react-bootstrap/Carousel";
+import Carousel from 'react-bootstrap/Carousel';
 import ban1 from "../images/carousel-1.jpg";
 import ban2 from "../images/carousel-2.jpg";
 import Upperimage from "../images/fruits.jpg";
