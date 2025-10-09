@@ -87,6 +87,59 @@
   transform: translateY(-4px);
   box-shadow: 0 10px 30px rgba(5, 150, 105, 0.35);
 }
+/* 🌿 Carousel Controls Container */
+.organic-carousel .carousel-control-prev,
+.organic-carousel .carousel-control-next {
+  width: 60px;
+  height: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(16, 185, 129, 0.8); /* green semi-transparent */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover Effect */
+.organic-carousel .carousel-control-prev:hover,
+.organic-carousel .carousel-control-next:hover {
+  background-color: #10b981; /* brighter green */
+  transform: scale(1.1);
+}
+
+/* Icon Style */
+.organic-carousel .carousel-control-prev-icon,
+.organic-carousel .carousel-control-next-icon {
+  background-image: none; /* remove default arrow */
+  font-size: 2rem;
+  color: #fff;
+}
+
+/* Use FontAwesome or Unicode arrows */
+.organic-carousel .carousel-control-prev-icon::after {
+  content: '⟨';
+}
+
+.organic-carousel .carousel-control-next-icon::after {
+  content: '⟩';
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .organic-carousel .carousel-control-prev,
+  .organic-carousel .carousel-control-next {
+    width: 45px;
+    height: 45px;
+  }
+
+  .organic-carousel .carousel-control-prev-icon::after,
+  .organic-carousel .carousel-control-next-icon::after {
+    font-size: 1.5rem;
+  }
+}
 
 /* 🌿 Animation */
 @keyframes fadeInUp {
