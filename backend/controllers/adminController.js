@@ -2,7 +2,7 @@ const Admin =require("../models/adminModel");
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
-export const loginAdmin = async (req, res) => {
+ const loginAdmin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -19,3 +19,6 @@ export const loginAdmin = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+module.exports={
+  loginAdmin
+}

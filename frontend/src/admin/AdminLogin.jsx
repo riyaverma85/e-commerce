@@ -1,21 +1,32 @@
 import { useState } from "react";
-// import api from "../api/api";
+import { useNavigate } from "react-router-dom";
+import Popup from "../components/Popup"; // <- our popup component
 import "../css/login.css";
 
 const AdminLogin = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [popup, setPopup] = useState({ message: "", type: "" }); // store popup info
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const { data } = await api.post("/auth/login", { email, password });
-      setMessage(data.message);
+
       localStorage.setItem("token", data.token);
-      alert("✅ Admin Login Successful!");
+
+      // Show success popup
+      setPopup({ message: "✅ Admin Login Successful!", type: "success" });
+
+      // Redirect after 1.5 seconds
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1500);
+
     } catch (err) {
-      setMessage(err.response?.data?.message || "Error logging in");
+      // Show error popup
+      setPopup({ message: err.response?.data?.message || "❌ Login Failed", type: "error" });
     }
   };
 
@@ -36,8 +47,14 @@ const AdminLogin = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Login</button>
-        {message && <p className="message">{message}</p>}
       </form>
+
+      {/* Popup replaces the old inline message */}
+      <Popup
+        message={popup.message}
+        type={popup.type}
+        onClose={() => setPopup({ message: "", type: "" })}
+      />
     </div>
   );
 };
