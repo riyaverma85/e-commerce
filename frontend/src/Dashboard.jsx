@@ -1,15 +1,17 @@
-import React from "react";
-import "../css/dashboard.css";
+
+import "./css/dashboard.css";
 
 const Dashboard = () => {
   return (
+    <>
+    
     <div className="dashboard-container">
       <header className="dashboard-header">
         <h1>🌿 Admin Dashboard</h1>
         <button
           onClick={() => {
             localStorage.removeItem("token");
-            window.location.href = "/login"; // redirect to login
+            window.location.href = "/admin"; // redirect to login
           }}
         >
           Logout
@@ -33,6 +35,7 @@ const Dashboard = () => {
         </div>
       </main>
     </div>
+    </>
   );
 };
 
