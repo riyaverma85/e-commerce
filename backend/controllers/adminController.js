@@ -1,6 +1,6 @@
 const Admin =require("../models/adminModel");
-import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
+const jwt =require("jsonwebtoken");
+const bcrypt =require("bcryptjs");
 
  const loginAdmin = async (req, res) => {
   const { email, password } = req.body;
