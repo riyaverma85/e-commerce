@@ -1,31 +1,32 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Popup from "../components/Popup"; // <- our popup component
+import Popup from "../components/Popup";
 import "../css/login.css";
+import axios from "axios";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [popup, setPopup] = useState({ message: "", type: "" }); // store popup info
+  const [popup, setPopup] = useState({ message: "", type: "" });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await api.post("/auth/login", { email, password });
+      // ✅ Make sure the slash is there
+      const api = `${import.meta.env.VITE_API_URL}/admin/login`;
+      const { data } = await axios.post(api, { email, password });
 
       localStorage.setItem("token", data.token);
 
-      // Show success popup
       setPopup({ message: "✅ Admin Login Successful!", type: "success" });
 
-      // Redirect after 1.5 seconds
       setTimeout(() => {
         navigate("/dashboard");
       }, 1500);
 
     } catch (err) {
-      // Show error popup
+      console.log(err);
       setPopup({ message: err.response?.data?.message || "❌ Login Failed", type: "error" });
     }
   };
@@ -49,7 +50,6 @@ const AdminLogin = () => {
         <button type="submit">Login</button>
       </form>
 
-      {/* Popup replaces the old inline message */}
       <Popup
         message={popup.message}
         type={popup.type}
