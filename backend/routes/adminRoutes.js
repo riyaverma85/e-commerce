@@ -1,7 +1,7 @@
-import express from "express";
-import { loginAdmin } from "../controllers/authController.js";
+const express =require("express");
+const loginAdmin =require  ("../controllers/adminController");
 
 const router = express.Router();
-router.post("/login", loginAdmin);
+router.post("/login", loginAdmin.loginAdmin);
 
-export default router;
+module.exports = router;
