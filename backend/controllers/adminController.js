@@ -1,4 +1,4 @@
-import Admin from "../models/Admin.js";
+const Admin =require("../models/adminModel");
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
