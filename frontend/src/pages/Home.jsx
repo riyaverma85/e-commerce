@@ -21,7 +21,7 @@ const Home = () => {
 
    
     <section className="organic-carousel">
-      <Carousel fade interval={4000} controls={false}>
+      <Carousel fade interval={4000} controls={true}>
         {/* Slide 1 */}
         <Carousel.Item>
           <img className="carousel-image" src={ban1} alt="Fresh Organic Vegetables" />
