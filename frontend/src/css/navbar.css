@@ -6,13 +6,14 @@
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .topnav {
-  background: #2d572c;
+  background: white;
   z-index: 999;
+  
 }
 
 .topnav .nav-links .nav-link {
-  color: #fff !important;
-  font-weight: 500;
+  color: #050505 !important;
+  font-weight: bold;
   margin: 0 10px;
   transition: 0.3s ease;
 }
@@ -34,4 +35,5 @@
 .sticky-top {
   position: sticky;
   top: 0;
+  
 }
