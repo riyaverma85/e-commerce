@@ -16,35 +16,54 @@ import product6 from "../images/product-7.jpg";
 const Home = () => {
   return (
     <>
-      {/* 🌿 Carousel Section */}
-      <Carousel fade interval={3000} className="organic-carousel">
+      
+
+
+   
+    <section className="organic-carousel">
+      <Carousel fade interval={4000} controls={false}>
+        {/* Slide 1 */}
         <Carousel.Item>
-          <img className="d-block w-100" src={ban1} alt="Fresh Organic Vegetables" />
-          <Carousel.Caption>
-            <h3>Fresh Organic Vegetables</h3>
-            <p>Eat healthy, live healthy — fresh from local organic farms daily.</p>
+          <img className="carousel-image" src={ban1} alt="Fresh Organic Vegetables" />
+          <div className="carousel-overlay"></div>
+          <div className="carousel-caption-left">
+            <h1>Fresh Organic Vegetables</h1>
+            <p>
+              Eat healthy, live healthy — fresh, local, and chemical-free produce straight from farms.
+            </p>
             <button className="carousel-btn">Shop Now</button>
-          </Carousel.Caption>
+          </div>
         </Carousel.Item>
 
+        {/* Slide 2 */}
         <Carousel.Item>
-          <img className="d-block w-100" src={ban2} alt="Natural & Chemical-Free" />
-          <Carousel.Caption>
-            <h3>100% Natural & Chemical-Free</h3>
-            <p>Products grown with love — no chemicals, only nature’s care.</p>
+          <img className="carousel-image" src={ban2} alt="Natural & Chemical-Free" />
+          <div className="carousel-overlay"></div>
+          <div className="carousel-caption-left">
+            <h1>100% Natural & Chemical-Free</h1>
+            <p>
+              Pure and eco-friendly products grown with love — just the way nature intended.
+            </p>
             <button className="carousel-btn">Explore More</button>
-          </Carousel.Caption>
+          </div>
         </Carousel.Item>
 
+        {/* Slide 3 */}
         <Carousel.Item>
-          <img className="d-block w-100" src={ban2} alt="Healthy Lifestyle Starts Here" />
-          <Carousel.Caption>
-            <h3>Healthy Lifestyle Starts Here</h3>
-            <p>Switch to organics today — because nature knows best.</p>
+          <img className="carousel-image" src={ban2} alt="Healthy Lifestyle" />
+          <div className="carousel-overlay"></div>
+          <div className="carousel-caption-left">
+            <h1>Healthy Lifestyle Starts Here</h1>
+            <p>
+              Make the switch to organic — nourish your body, care for the planet.
+            </p>
             <button className="carousel-btn">Get Started</button>
-          </Carousel.Caption>
+          </div>
         </Carousel.Item>
       </Carousel>
+    </section>
+  
+
 
       {/* 🥬 Upper Section: Image + Text */}
       <section className="organic-upper">

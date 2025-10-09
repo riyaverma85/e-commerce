@@ -1,7 +1,7 @@
 
 
 import "../css/about.css";
-
+import aboutbanner from "../images/aboutbanner.jpeg";
 const About = () => {
   return (
     <section className="about-section">
@@ -50,7 +50,7 @@ const About = () => {
           </div>
           <div className="about-image">
             <img 
-              src="https://images.unsplash.com/photo-1506807803488-8eafc1537e99?auto=format&fit=crop&w=800&q=80" 
+              src={aboutbanner} 
               alt="Organic Products"
             />
           </div>

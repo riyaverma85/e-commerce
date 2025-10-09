@@ -4,6 +4,7 @@ import Layout from "./Layout";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import About from "./pages/About";
+import AdminLogin from "./admin/AdminLogin";
 
 
 const App=()=>{
@@ -16,6 +17,7 @@ const App=()=>{
                <Route path="/home" element={<Home/>}/>
                <Route path="/shop" element={<Shop/>}/>
                 <Route path="/about" element={<About/>}/>
+                <Route path="/admin" element={<AdminLogin/>}/>
             </Route>
            </Routes>
         </BrowserRouter>
