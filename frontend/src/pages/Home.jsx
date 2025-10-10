@@ -160,25 +160,7 @@ const Home = () => {
           </p>
         </div>
       </section>
-{/* ==============================================Sixth Section==========================================*/}
-      {/* Why Choose Us Section */}
-      <section className="why">
-        <h2>Why Choose Us</h2>
-        <div className="why-grid">
-          <div className="why-card">
-            <h3>🌱 100% Organic</h3>
-            <p>No pesticides, no chemicals — just pure, natural goodness.</p>
-          </div>
-          <div className="why-card">
-            <h3>🚜 Direct from Farms</h3>
-            <p>We partner with trusted organic farmers across the country.</p>
-          </div>
-          <div className="why-card">
-            <h3>🍎 Healthy Lifestyle</h3>
-            <p>Eat better, feel better — nourish your body naturally.</p>
-          </div>
-        </div>
-      </section>
+
 {/* ==============================================Seventh Section==========================================*/}
       {/* Farm Section */}
       <section className="farm">
@@ -190,15 +172,7 @@ const Home = () => {
           <button>Explore More</button>
         </div>
       </section>
-{/* ==============================================Eightth Section==========================================*/}
-      {/* CTA Section */}
-      <section className="cta">
-        <h2>Join the Green Movement 🌾</h2>
-        <p>
-          Together, we can build a sustainable future — one organic choice at a time.
-        </p>
-        <button>Get Started</button>
-      </section>
+
     
     {/* ==============================================Ninth Section==========================================*/}
       
