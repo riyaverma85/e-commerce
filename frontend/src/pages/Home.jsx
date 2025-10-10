@@ -333,7 +333,41 @@ const Home = () => {
               </div>
             </div>
           </section>
-          
+          {/* 🌱 Features & Testimonials Section */}
+<section className="features-testimonials">
+  <div className="features-overlay">
+    <div className="features-container">
+      {/* Upper Features */}
+      <div className="features-upper">
+        <div className="feature-card">
+          <h3>Curated Products</h3>
+          <p>from Handpicked Sellers</p>
+        </div>
+        <div className="feature-card">
+          <h3>Handmade</h3>
+          <p>Made with passion by 300+ curators across the country.</p>
+        </div>
+        <div className="feature-card">
+          <h3>100% Natural</h3>
+          <p>Eat local, consume local, closer to nature.</p>
+        </div>
+      </div>
+
+      {/* Lower Testimonials */}
+      <div className="testimonials">
+        <div className="testimonial-card">
+          <p>“Also Like the fact that I can pick my staples in the brown paper packs and glass containers at the zero waste section, with an idea to reduce plastic and also more convenient.”</p>
+          <h4>Smitha - Cunningham Store</h4>
+        </div>
+        <div className="testimonial-card">
+          <p>“Very happy to receive my order. Its so perfect, packing was very good and delivery is so quick also I'm very thankful to staff members.”</p>
+          <h4>Rahab Munir - The Organic Shop</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
     </>
   );
 };

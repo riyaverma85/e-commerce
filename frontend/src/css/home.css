@@ -588,7 +588,9 @@ section {
   max-width: 1080px;
   margin: 0 auto;
 }
-
+.why{
+  background: white;
+}
 /* Grid for why cards */
 .why-grid{
   max-width: 1080px;
@@ -603,6 +605,7 @@ section {
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(11,18,32,0.06);
   border: 1px solid rgba(15,23,36,0.04);
+  background: whitesmoke;
 }
 
 /* BUTTON: base */
@@ -817,5 +820,193 @@ section {
   }
   .farm-content {
     margin: 0 1rem;
+  }
+}
+/* ================= CTA Section ================= */
+.cta {
+  width: 100%;
+  padding: clamp(3rem, 5vw, 5rem) 1.5rem;
+  background: linear-gradient(135deg, #16a34a 0%, #10b981 100%);
+  color: #ffffff;
+  text-align: center;
+  font-family: "Poppins", "Inter", sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floating organic shape overlay for a premium look */
+.cta::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -30%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.12), transparent 70%);
+  transform: rotate(15deg);
+  z-index: 0;
+}
+
+/* CTA content */
+.cta h2 {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.cta p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  color: #f0fdf4;
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Modern animated button */
+.cta button {
+  --pad-y: clamp(.7rem, 1vw, .85rem);
+  --pad-x: clamp(1.2rem, 3vw, 1.8rem);
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  color: #047857;
+  border: none;
+  border-radius: 12px;
+  font-size: clamp(1rem, 1.8vw, 1.1rem);
+  font-weight: 600;
+  padding: var(--pad-y) var(--pad-x);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.25);
+  transition: all 0.3s ease;
+}
+
+.cta button::after {
+  content: "→";
+  font-weight: 700;
+  transition: transform 0.3s ease;
+}
+
+.cta button:hover::after {
+  transform: translateX(8px);
+}
+
+.cta button:hover {
+  transform: translateY(-3px);
+  background: #f9fafb;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive fine-tuning */
+@media (max-width: 768px) {
+  .cta {
+    padding: 3rem 1rem;
+  }
+  .cta p {
+    font-size: 1rem;
+  }
+}
+.features-testimonials {
+  position: relative;
+  background: url('https://images.unsplash.com/photo-1524594154908-edd29153f1b3?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  padding: clamp(4rem, 6vw, 6rem) 1.5rem;
+  color: white;
+}
+
+.features-overlay {
+  background: rgba(0, 0, 0, 0.55);
+  padding: clamp(3rem, 5vw, 5rem);
+  border-radius: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.features-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* Upper Features Grid */
+.features-upper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-card {
+  background: rgba(255,255,255,0.1);
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #10b981;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: #f0fdf4;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+}
+
+/* Testimonials */
+.testimonials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.testimonial-card {
+  background: rgba(255,255,255,0.08);
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  text-align: center;
+}
+
+.testimonial-card p {
+  font-size: 1rem;
+  font-style: italic;
+  margin-bottom: 1rem;
+  color: #e3fcef;
+}
+
+.testimonial-card h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #a7f3d0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .features-container {
+    gap: 2rem;
+  }
+  
+  .features-upper, .testimonials {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card, .testimonial-card {
+    padding: 1.5rem 1rem;
   }
 }
