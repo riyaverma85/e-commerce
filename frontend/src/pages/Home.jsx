@@ -138,17 +138,18 @@ const Home = () => {
       </section>
 {/* ==============================================Fourth Section==========================================
       
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="overlay"></div>
-        <div className="hero-content">
-          <h1>Pure • Natural • Healthy Living 🌿</h1>
-          <p>
-            Discover the freshness of organic life — where every product is grown with love and care for you and the planet.
-          </p>
-          <button>Shop Organic</button>
-        </div>
-      </section>
+      {/* 🌿 Modern Hero Section */}
+<section className="hero">
+  <div className="hero-content">
+    <h1>Pure • Natural • Healthy Living 🌿</h1>
+    <p>
+      Discover the freshness of organic life — where every product is grown with love and care for you and the planet.
+    </p>
+    <button>Shop Organic</button>
+  </div>
+  <div className="hero-image"></div>
+</section>
+
 {/* ==============================================Fifth Section==========================================*/}
       {/* About Section */}
       <section className="about">
