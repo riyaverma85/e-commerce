@@ -179,43 +179,61 @@
     font-size: 0.9rem;
   }
 }
-
-
-/* =================== Global Styles =================== */
-body {
+/* ========================= GLOBAL ========================= */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
-  line-height: 1.6;
+}
+
+body {
+  background: #fff;
   color: #333;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  color: #2a7a42; /* green accent */
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 button {
   cursor: pointer;
-  transition: all 0.3s ease;
   border: none;
   outline: none;
+  transition: 0.3s ease;
+  font-weight: 500;
 }
 
-/* =================== Upper Section =================== */
+/* ========================= UPPER SECTION ========================= */
 .organic-upper {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 80px 20px;
-  background: #f8faf5;
+  padding: 80px 0;
+  background: #fff; /* mostly white */
 }
 
 .upper-container {
   display: flex;
+  gap: 40px;
   flex-wrap: wrap;
-  max-width: 1200px;
-  gap: 50px;
   align-items: center;
+}
+
+.upper-text {
+  flex: 1;
 }
 
 .upper-text h2 {
   font-size: 2.5rem;
-  color: #2e7d32;
   margin-bottom: 20px;
 }
 
@@ -226,56 +244,58 @@ button {
 
 .organic-list {
   list-style: none;
-  padding: 0;
   margin-bottom: 20px;
 }
 
 .organic-list li {
-  margin: 8px 0;
-  font-size: 1rem;
-  color: #555;
+  margin-bottom: 10px;
+  color: #2a7a42;
+  font-weight: 500;
 }
 
 .btnn2 {
-  background: #2e7d32;
-  color: white;
-  padding: 10px 25px;
-  font-size: 1rem;
-  border-radius: 5px;
+  padding: 12px 25px;
+  background: #2a7a42;
+  color: #fff;
+  border-radius: 50px;
 }
 
 .btnn2:hover {
-  background: #1b4d1b;
+  background: #1f5930;
+  transform: translateY(-2px);
 }
 
-/* Upper Image */
 .upper-image img {
   width: 100%;
   max-width: 500px;
   border-radius: 15px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
 }
 
-/* =================== Parallax Banner =================== */
+.upper-image img:hover {
+  transform: scale(1.03);
+}
+
+/* ========================= PARALLAX BANNER ========================= */
 .parallax-banner {
-  background: url('../assets/parallax.jpg') center/cover no-repeat fixed;
-  height: 400px;
   position: relative;
+  background: url('parallax-bg.jpg') center/cover no-repeat fixed;
+  height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .banner-overlay {
-  background: rgba(0,0,0,0.4);
-  color: white;
-  padding: 20px;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 40px 60px;
+  border-radius: 15px;
   text-align: center;
-  border-radius: 10px;
+  color: #2a7a42;
 }
 
 .banner-overlay h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-bottom: 15px;
 }
 
@@ -283,53 +303,59 @@ button {
   font-size: 1.2rem;
 }
 
-/* =================== Features Section =================== */
+/* ========================= FEATURES / CARDS ========================= */
 .features-bg {
-  background: #f0f9f4;
-  padding: 80px 20px;
+  padding: 80px 0;
+}
+
+.features-section h3 {
   text-align: center;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.features-section p {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 1.1rem;
 }
 
 .feature-cards {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
   justify-content: center;
-  gap: 30px;
-  margin-top: 40px;
 }
 
 .feature-card {
-  background: white;
-  padding: 30px 20px;
-  width: 300px;
-  border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+  background: #fff;
+  border-radius: 15px;
+  padding: 25px;
+  flex: 1 1 250px;
+  max-width: 300px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .feature-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
 .feature-icon {
   font-size: 2.5rem;
-  color: #2e7d32;
+  color: #2a7a42;
   margin-bottom: 15px;
 }
 
-.feature-card h4 {
-  margin-bottom: 10px;
-  color: #2e7d32;
-}
-
-/* =================== Hero Section =================== */
+/* ========================= HERO ========================= */
 .hero {
   position: relative;
-  background: url('../assets/hero-bg.jpg') center/cover no-repeat;
+  background: url('hero-bg.jpg') center/cover no-repeat fixed;
   height: 500px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .hero .overlay {
@@ -338,14 +364,14 @@ button {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(46,125,50,0.6);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .hero-content {
   position: relative;
+  color: #2a7a42;
   text-align: center;
-  color: white;
-  max-width: 800px;
+  z-index: 2;
 }
 
 .hero-content h1 {
@@ -355,179 +381,157 @@ button {
 
 .hero-content p {
   font-size: 1.2rem;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
-/* =================== About Section =================== */
-.about {
-  padding: 80px 20px;
-  text-align: center;
+.hero-content button {
+  padding: 15px 35px;
+  background: #2a7a42;
+  color: #fff;
+  border-radius: 50px;
 }
 
-.about h2 {
-  font-size: 2.5rem;
-  color: #2e7d32;
-  margin-bottom: 20px;
+.hero-content button:hover {
+  background: #1f5930;
 }
 
-.about p {
-  font-size: 1.1rem;
-  max-width: 800px;
-  margin: auto;
-}
-
-/* =================== Products Section =================== */
+/* ========================= PRODUCTS ========================= */
 .products-section {
-  padding: 80px 20px;
-  background: #f8faf5;
+  padding: 80px 0;
 }
 
 .product-row {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
   justify-content: center;
-  gap: 30px;
-  margin-top: 40px;
 }
 
 .product-card {
-  background: white;
-  width: 250px;
-  border-radius: 10px;
+  background: #fff;
+  border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+  flex: 1 1 250px;
+  max-width: 250px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-card:hover {
-  transform: translateY(-10px);
-}
-
-.product-img {
-  position: relative;
+  transform: translateY(-8px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
 .product-img img {
   width: 100%;
   display: block;
+  transition: transform 0.3s ease;
+}
+
+.product-img img:hover {
+  transform: scale(1.03);
 }
 
 .product-badge {
   position: absolute;
   top: 10px;
   left: 10px;
-  background: #2e7d32;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
+  background: #2a7a42;
+  color: #fff;
+  padding: 3px 8px;
   font-size: 0.8rem;
+  border-radius: 10px;
 }
 
-.product-content {
-  padding: 20px;
+/* ========================= BUTTONS ========================= */
+.view-btn, .cart-btn {
+  padding: 8px 15px;
+  border-radius: 50px;
+  background: #2a7a42;
+  color: #fff;
+  margin: 5px 0;
+}
+
+.view-btn:hover, .cart-btn:hover {
+  background: #1f5930;
+}
+
+/* ========================= TESTIMONIALS ========================= */
+.testimonials {
+  padding: 80px 0;
+  background: #fff;
+}
+
+.testimonial-card {
+  background: #fff;
+  border-radius: 15px;
+  padding: 25px;
+  flex: 1 1 250px;
+  max-width: 300px;
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.product-content h4 {
-  margin-bottom: 10px;
-  color: #2e7d32;
+.testimonial-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
-.price {
-  margin-bottom: 15px;
+/* ========================= BLOG ========================= */
+.blog-tips {
+  background: #fff;
+  padding: 80px 0;
 }
 
-.new-price {
-  color: #2e7d32;
-  font-weight: bold;
+.blog-card {
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  flex: 1 1 250px;
+  max-width: 300px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.08;
+}
+
+.blog-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+/* ========================= NEWSLETTER ========================= */
+.newsletter {
+  text-align: center;
+  padding: 80px 0;
+}
+
+.newsletter-form input {
+  padding: 12px 20px;
+  border-radius: 50px;
+  border: 1px solid #ccc;
+  width: 250px;
+  max-width: 80%;
   margin-right: 10px;
 }
 
-.old-price {
-  text-decoration: line-through;
-  color: #888;
+.newsletter-form button {
+  padding: 12px 25px;
+  background: #2a7a42;
+  color: #fff;
+  border-radius: 50px;
 }
 
-.product-buttons button {
-  padding: 8px 15px;
-  margin: 5px;
-  border-radius: 5px;
+.newsletter-form button:hover {
+  background: #1f5930;
 }
 
-.view-btn {
-  background: #f0f0f0;
-}
-
-.view-btn:hover {
-  background: #dcdcdc;
-}
-
-.cart-btn {
-  background: #2e7d32;
-  color: white;
-}
-
-.cart-btn:hover {
-  background: #1b4d1b;
-}
-
-.view-more-container {
-  text-align: center;
-  margin-top: 30px;
-}
-
-.view-more-btn {
-  padding: 10px 25px;
-  background: #2e7d32;
-  color: white;
-  border-radius: 5px;
-}
-
-.view-more-btn:hover {
-  background: #1b4d1b;
-}
-
-/* =================== CTA Section =================== */
-.cta {
-  padding: 80px 20px;
-  text-align: center;
-  background: #2e7d32;
-  color: white;
-}
-
-.cta button {
-  background: white;
-  color: #2e7d32;
-  padding: 10px 25px;
-}
-
-.cta button:hover {
-  background: #dcdcdc;
-  color: #2e7d32;
-}
-
-/* =================== Responsive =================== */
-@media (max-width: 1024px) {
-  .upper-container, .feature-cards, .product-row {
+/* ========================= RESPONSIVE ========================= */
+@media(max-width: 991px) {
+  .upper-container, .feature-cards, .product-row, .testimonial-cards, .blog-cards {
     flex-direction: column;
     align-items: center;
   }
 
   .hero-content h1 {
-    font-size: 2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .organic-upper, .features-bg, .products-section, .cta, .about {
-    padding: 50px 15px;
-  }
-
-  .upper-text h2 {
-    font-size: 2rem;
-  }
-
-  .banner-overlay h1 {
     font-size: 2rem;
   }
 }
