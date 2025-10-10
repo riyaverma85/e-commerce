@@ -16,10 +16,7 @@ import product6 from "../images/product-7.jpg";
 const Home = () => {
   return (
     <>
-      
-
-
-   
+    {/* {=======================Carousel========================================================} */}
     <section className="organic-carousel">
       <Carousel fade interval={4000} controls={true}>
         {/* Slide 1 */}
@@ -63,9 +60,7 @@ const Home = () => {
       </Carousel>
     </section>
   
-
-
-      
+{/* {=============================First section========================================================} */}
     <div className="home">
 
       {/* 🥬 Upper Section */}
@@ -89,7 +84,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-
+{/* {==============================Second section========================================================} */}
       {/* 🍃 Parallax Banner */}
       <section className="parallax-banner">
         <div className="banner-overlay">
@@ -98,7 +93,7 @@ const Home = () => {
           <button className="btn-banner">Explore Products</button>
         </div>
       </section>
-
+{/* {==============================Third section========================================================} */}
       {/* 🌻 Features Section */}
       <section className="features-section">
         <div className="features-container">
@@ -138,7 +133,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-
+{/* {==========================Fourth section========================================================} */}
       {/* 🌾 Hero Section */}
       <section className="hero">
         <div className="overlay"></div>
@@ -150,7 +145,7 @@ const Home = () => {
           <button className="hero-btn">Shop Organic</button>
         </div>
       </section>
-
+  {/* {================================Fifth section========================================================} */}
       {/* 🌱 About Section */}
       <section className="about">
         <div className="about-inner">
@@ -161,7 +156,7 @@ const Home = () => {
           </p>
         </div>
       </section>
-
+ {/* {=================================Sixth section========================================================} */}
       {/* 💚 Why Choose Section */}
       <section className="why">
         <h2>Why Choose Us</h2>
@@ -180,7 +175,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-
+{/* {======================================Seventh Section=================================================} */}
       {/* 🌾 Farm Section */}
       <section className="farm">
         <div className="farm-content">
@@ -188,10 +183,10 @@ const Home = () => {
           <p>
             Taste the difference of truly fresh produce — handpicked and delivered at peak freshness.
           </p>
-          <button>Explore More</button>
+          <button className="shop-btn ">Explore More</button>
         </div>
       </section>
-
+{/* {=================================Eighth Section========================================================} */}
       {/* 🌿 CTA Section */}
       <section className="cta">
         <h2>Join the Green Movement 🌾</h2>
@@ -238,6 +233,8 @@ const Home = () => {
       </section>
     </div>
     <div className="home-container">
+
+  {/* {=============================Ninth section========================================================} */}
       {/* Hero Section */}
       <section className="hero-section">
         <div className="overlay"></div>
@@ -250,7 +247,7 @@ const Home = () => {
           <button className="shop-btn">Explore Products</button>
         </div>
       </section>
-
+{/* {==================================Tenth Section========================================================} */}
       {/* About Section */}
       <section className="about-section">
         <div className="about-image"></div>
@@ -264,7 +261,7 @@ const Home = () => {
           <button className="learn-btn">Learn More</button>
         </div>
       </section>
-
+{/* {============================Eleventh Section========================================================} */}
       {/* Features Section */}
       <section className="features-section">
         <h2>Our Core Values</h2>
@@ -286,7 +283,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-
+{/* {======================================Twelfth Section========================================================} */}
       {/* Parallax Section */}
       <section className="parallax-section">
         <div className="parallax-overlay"></div>
@@ -298,7 +295,7 @@ const Home = () => {
           </p>
         </div>
       </section>
-
+{/* {==============================Thirteenth Section========================================================} */}
       {/* Testimonial Section */}
       <section className="testimonial-section">
         <h2>What Our Customers Say</h2>
