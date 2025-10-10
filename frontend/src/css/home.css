@@ -179,7 +179,7 @@
     font-size: 0.9rem;
   }
 }
-/* ========================= GLOBAL ========================= */
+/* ================= Global Styles ================= */
 * {
   margin: 0;
   padding: 0;
@@ -188,350 +188,134 @@
 }
 
 body {
-  background: #fff;
+  background: #f6f8f7;
   color: #333;
-  line-height: 1.6;
 }
 
-h1, h2, h3, h4 {
-  font-weight: 600;
-  color: #2a7a42; /* green accent */
+/* ================= Global Styles ================= */
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body {background:#f6f8f7;color:#333;}
+h1,h2,h3,h4 {color:#2c6e49;font-weight:600;}
+p {color:#555;line-height:1.7;}
+button {cursor:pointer;border:none;border-radius:6px;transition:all 0.3s ease;}
+img {display:block;width:100%;height:auto;}
+
+/* ================= Upper Section ================= */
+.organic-upper {display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:100px 20px;background:url('../assets/organic-upper-bg.jpg') center/cover no-repeat;position:relative;}
+.organic-upper::before {content:'';position:absolute;inset:0;background:rgba(0,0,0,0.25);z-index:1;}
+.upper-container {display:flex;max-width:1200px;gap:50px;z-index:2;position:relative;flex-wrap:wrap;}
+.upper-text {flex:1;min-width:300px;color:#fff;}
+.upper-text h2 {font-size:3rem;margin-bottom:20px;}
+.upper-text p {font-size:1.1rem;margin-bottom:20px;}
+.organic-list li {margin-bottom:10px;font-size:1rem;}
+.btnn2 {padding:12px 30px;background:#2c6e49;color:#fff;}
+.btnn2:hover {background:#1f4d34;transform:translateY(-3px);}
+.upper-image {flex:1;min-width:300px;overflow:hidden;border-radius:15px;}
+.upper-image img {transition:transform 0.5s ease;}
+.upper-image img:hover {transform:scale(1.1);}
+
+/* ================= Parallax Banner ================= */
+.parallax-banner {position:relative;background:url('../assets/parallax-banner.jpg') center/cover no-repeat;height:450px;display:flex;justify-content:center;align-items:center;text-align:center;color:#fff;background-attachment:fixed;}
+.parallax-banner::before {content:'';position:absolute;inset:0;background:rgba(0,0,0,0.35);z-index:1;}
+.parallax-banner h1,.parallax-banner p {position:relative;z-index:2;}
+
+/* ================= Features Cards ================= */
+.features-section {padding:80px 20px;background:#f6f8f7;text-align:center;}
+.feature-cards {display:flex;flex-wrap:wrap;justify-content:center;gap:25px;margin-top:40px;}
+.feature-card {background:#fff;border-radius:15px;padding:30px 20px;flex:1 1 260px;box-shadow:0 8px 20px rgba(0,0,0,0.1);text-align:center;transition:all 0.4s ease;}
+.feature-card:hover {transform:translateY(-10px);box-shadow:0 15px 35px rgba(0,0,0,0.2);}
+.feature-icon {font-size:3rem;color:#2c6e49;margin-bottom:15px;}
+.feature-card h4 {margin-bottom:12px;}
+.feature-card p {font-size:1rem;color:#555;margin-bottom:15px;}
+.btnn, .btnn1 {padding:10px 25px;background:#2c6e49;color:#fff;border-radius:6px;}
+.btnn:hover, .btnn1:hover {background:#1f4d34;transform:translateY(-2px);}
+
+/* ================= Hero Section ================= */
+.hero {position:relative;background:url('../assets/hero-bg.jpg') center/cover no-repeat;height:500px;display:flex;justify-content:center;align-items:center;text-align:center;color:#fff;}
+.hero::before {content:'';position:absolute;inset:0;background:rgba(0,0,0,0.35);z-index:1;}
+.hero-content {position:relative;z-index:2;}
+.hero-content h1 {font-size:3.2rem;margin-bottom:20px;}
+.hero-content p {font-size:1.2rem;margin-bottom:25px;}
+.hero-content button {padding:12px 35px;background:#2c6e49;color:#fff;border-radius:6px;}
+.hero-content button:hover {background:#1f4d34;transform:translateY(-3px);}
+
+/* ================= About Section ================= */
+.about {padding:70px 20px;background:#fff;text-align:center;}
+.about-inner h2 {font-size:2.5rem;margin-bottom:20px;}
+.about-inner p {font-size:1.1rem;line-height:1.8;}
+
+/* ================= Why Choose Us ================= */
+.why {padding:70px 20px;text-align:center;background:#e8f3ed;}
+.why h2 {font-size:2.5rem;margin-bottom:45px;}
+.why-grid {display:flex;flex-wrap:wrap;gap:25px;justify-content:center;}
+.why-card {background:#fff;padding:25px 20px;border-radius:12px;flex:1 1 260px;transition:transform 0.3s ease, box-shadow 0.3s ease;}
+.why-card:hover {transform:translateY(-8px);box-shadow:0 12px 28px rgba(0,0,0,0.15);}
+.why-card h3 {margin-bottom:10px;}
+
+/* ================= Farm Section ================= */
+.farm {position:relative;padding:80px 20px;background:url('../assets/farm-bg.jpg') center/cover no-repeat;color:#fff;text-align:center;}
+.farm::before {content:'';position:absolute;inset:0;background:rgba(0,0,0,0.35);}
+.farm-content {position:relative;z-index:2;}
+.farm-content h2 {font-size:2.8rem;margin-bottom:15px;}
+.farm-content p {font-size:1.1rem;margin-bottom:20px;}
+.farm-content button {padding:12px 30px;background:#2c6e49;color:#fff;border-radius:6px;}
+.farm-content button:hover {background:#1f4d34;transform:translateY(-3px);}
+
+/* ================= CTA Section ================= */
+.cta {padding:70px 20px;text-align:center;background:#2c6e49;color:#fff;}
+.cta h2 {font-size:2.5rem;margin-bottom:15px;}
+.cta p {font-size:1.1rem;margin-bottom:25px;}
+.cta button {padding:12px 35px;background:#fff;color:#2c6e49;font-weight:600;border-radius:6px;}
+.cta button:hover {background:#dfeaea;}
+
+/* ================= Products Section ================= */
+.products-section {padding:80px 20px;text-align:center;background:#f6f8f7;}
+.product-row {display:flex;flex-wrap:wrap;gap:25px;justify-content:center;margin-top:40px;}
+.product-card {background:#fff;border-radius:15px;overflow:hidden;flex:1 1 250px;transition:all 0.4s ease;box-shadow:0 8px 20px rgba(0,0,0,0.1);}
+.product-card:hover {transform:translateY(-10px);box-shadow:0 15px 35px rgba(0,0,0,0.2);}
+.product-img {position:relative;overflow:hidden;}
+.product-img img {transition:transform 0.5s ease;}
+.product-img img:hover {transform:scale(1.1);}
+.product-badge {position:absolute;top:10px;left:10px;background:#2c6e49;color:#fff;padding:5px 10px;border-radius:5px;font-size:0.8rem;}
+.product-content {padding:15px;}
+.price {margin:10px 0;}
+.new-price {color:#2c6e49;font-weight:600;margin-right:10px;}
+.old-price {color:#999;text-decoration:line-through;}
+.product-buttons {display:flex;gap:10px;justify-content:center;margin-top:10px;}
+.view-btn, .cart-btn {padding:8px 15px;background:#2c6e49;color:#fff;border-radius:6px;}
+.view-btn:hover, .cart-btn:hover {background:#1f4d34;transform:translateY(-2px);}
+
+/* ================= Testimonials ================= */
+.testimonials {padding:80px 20px;background:#fff;text-align:center;}
+.testimonial-cards {display:flex;flex-wrap:wrap;gap:25px;justify-content:center;margin-top:40px;}
+.testimonial-card {background:#f6f8f7;padding:25px 20px;border-radius:12px;flex:1 1 250px;transition:transform 0.3s ease;box-shadow:0 8px 20px rgba(0,0,0,0.1);}
+.testimonial-card:hover {transform:translateY(-8px);box-shadow:0 12px 28px rgba(0,0,0,0.15);}
+.testimonial-card h4 {margin-top:15px;color:#2c6e49;}
+
+/* ================= Blog/ Tips ================= */
+.blog-tips {padding:80px 20px;background:#e8f3ed;text-align:center;}
+.blog-cards {display:flex;flex-wrap:wrap;gap:25px;justify-content:center;margin-top:40px;}
+.blog-card {background:#fff;padding:25px 20px;border-radius:12px;flex:1 1 250px;transition:transform 0.3s ease;box-shadow:0 8px 20px rgba(0,0,0,0.1);}
+.blog-card:hover {transform:translateY(-8px);box-shadow:0 12px 28px rgba(0,0,0,0.15);}
+
+/* ================= Newsletter ================= */
+.newsletter {padding:80px 20px;background:#2c6e49;color:#fff;text-align:center;}
+.newsletter input {padding:12px 15px;border-radius:6px;border:none;margin-right:10px;width:250px;max-width:80%;}
+.newsletter button {padding:12px 25px;background:#fff;color:#2c6e49;border-radius:6px;font-weight:600;}
+.newsletter button:hover {background:#dfeaea;}
+
+/* ================= Certifications ================= */
+.certifications {padding:80px 20px;background:#f6f8f7;text-align:center;}
+.cert-grid {display:flex;flex-wrap:wrap;gap:25px;justify-content:center;margin-top:40px;}
+.cert-card {flex:1 1 150px;background:#fff;padding:15px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.1);transition:all 0.3s ease;}
+.cert-card:hover {transform:translateY(-5px);box-shadow:0 12px 28px rgba(0,0,0,0.15);}
+
+/* ================= Responsive ================= */
+@media (max-width:1024px){
+  .upper-container,.feature-cards,.why-grid,.product-row,.testimonial-cards,.blog-cards,.cert-grid{flex-direction:column;align-items:center;}
+  .parallax-banner{background-attachment:scroll;}
 }
-
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  outline: none;
-  transition: 0.3s ease;
-  font-weight: 500;
-}
-
-/* ========================= UPPER SECTION ========================= */
-.organic-upper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 80px 0;
-  background: #fff; /* mostly white */
-}
-
-.upper-container {
-  display: flex;
-  gap: 40px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.upper-text {
-  flex: 1;
-}
-
-.upper-text h2 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
-
-.upper-text p {
-  font-size: 1.1rem;
-  margin-bottom: 20px;
-}
-
-.organic-list {
-  list-style: none;
-  margin-bottom: 20px;
-}
-
-.organic-list li {
-  margin-bottom: 10px;
-  color: #2a7a42;
-  font-weight: 500;
-}
-
-.btnn2 {
-  padding: 12px 25px;
-  background: #2a7a42;
-  color: #fff;
-  border-radius: 50px;
-}
-
-.btnn2:hover {
-  background: #1f5930;
-  transform: translateY(-2px);
-}
-
-.upper-image img {
-  width: 100%;
-  max-width: 500px;
-  border-radius: 15px;
-  transition: transform 0.3s ease;
-}
-
-.upper-image img:hover {
-  transform: scale(1.03);
-}
-
-/* ========================= PARALLAX BANNER ========================= */
-.parallax-banner {
-  position: relative;
-  background: url('parallax-bg.jpg') center/cover no-repeat fixed;
-  height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.banner-overlay {
-  background: rgba(255, 255, 255, 0.3);
-  padding: 40px 60px;
-  border-radius: 15px;
-  text-align: center;
-  color: #2a7a42;
-}
-
-.banner-overlay h1 {
-  font-size: 2.5rem;
-  margin-bottom: 15px;
-}
-
-.banner-overlay p {
-  font-size: 1.2rem;
-}
-
-/* ========================= FEATURES / CARDS ========================= */
-.features-bg {
-  padding: 80px 0;
-}
-
-.features-section h3 {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 15px;
-}
-
-.features-section p {
-  text-align: center;
-  margin-bottom: 50px;
-  font-size: 1.1rem;
-}
-
-.feature-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.feature-card {
-  background: #fff;
-  border-radius: 15px;
-  padding: 25px;
-  flex: 1 1 250px;
-  max-width: 300px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.feature-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-}
-
-.feature-icon {
-  font-size: 2.5rem;
-  color: #2a7a42;
-  margin-bottom: 15px;
-}
-
-/* ========================= HERO ========================= */
-.hero {
-  position: relative;
-  background: url('hero-bg.jpg') center/cover no-repeat fixed;
-  height: 500px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.hero-content {
-  position: relative;
-  color: #2a7a42;
-  text-align: center;
-  z-index: 2;
-}
-
-.hero-content h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-
-.hero-content p {
-  font-size: 1.2rem;
-  margin-bottom: 25px;
-}
-
-.hero-content button {
-  padding: 15px 35px;
-  background: #2a7a42;
-  color: #fff;
-  border-radius: 50px;
-}
-
-.hero-content button:hover {
-  background: #1f5930;
-}
-
-/* ========================= PRODUCTS ========================= */
-.products-section {
-  padding: 80px 0;
-}
-
-.product-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.product-card {
-  background: #fff;
-  border-radius: 15px;
-  overflow: hidden;
-  flex: 1 1 250px;
-  max-width: 250px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-}
-
-.product-img img {
-  width: 100%;
-  display: block;
-  transition: transform 0.3s ease;
-}
-
-.product-img img:hover {
-  transform: scale(1.03);
-}
-
-.product-badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: #2a7a42;
-  color: #fff;
-  padding: 3px 8px;
-  font-size: 0.8rem;
-  border-radius: 10px;
-}
-
-/* ========================= BUTTONS ========================= */
-.view-btn, .cart-btn {
-  padding: 8px 15px;
-  border-radius: 50px;
-  background: #2a7a42;
-  color: #fff;
-  margin: 5px 0;
-}
-
-.view-btn:hover, .cart-btn:hover {
-  background: #1f5930;
-}
-
-/* ========================= TESTIMONIALS ========================= */
-.testimonials {
-  padding: 80px 0;
-  background: #fff;
-}
-
-.testimonial-card {
-  background: #fff;
-  border-radius: 15px;
-  padding: 25px;
-  flex: 1 1 250px;
-  max-width: 300px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.testimonial-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-}
-
-/* ========================= BLOG ========================= */
-.blog-tips {
-  background: #fff;
-  padding: 80px 0;
-}
-
-.blog-card {
-  background: #fff;
-  border-radius: 15px;
-  padding: 20px;
-  flex: 1 1 250px;
-  max-width: 300px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.08;
-}
-
-.blog-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-}
-
-/* ========================= NEWSLETTER ========================= */
-.newsletter {
-  text-align: center;
-  padding: 80px 0;
-}
-
-.newsletter-form input {
-  padding: 12px 20px;
-  border-radius: 50px;
-  border: 1px solid #ccc;
-  width: 250px;
-  max-width: 80%;
-  margin-right: 10px;
-}
-
-.newsletter-form button {
-  padding: 12px 25px;
-  background: #2a7a42;
-  color: #fff;
-  border-radius: 50px;
-}
-
-.newsletter-form button:hover {
-  background: #1f5930;
-}
-
-/* ========================= RESPONSIVE ========================= */
-@media(max-width: 991px) {
-  .upper-container, .feature-cards, .product-row, .testimonial-cards, .blog-cards {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .hero-content h1 {
-    font-size: 2rem;
-  }
+@media (max-width:768px){
+  .organic-upper{padding:60px 15px;}
+  .upper-text h2,.parallax-banner h1,.hero-content h1{font-size:2rem;}
 }
