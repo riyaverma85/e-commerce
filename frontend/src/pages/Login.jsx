@@ -3,7 +3,7 @@ import { useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
-
+import "../css/login.css"
 const Login = () => {
   const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
@@ -27,21 +27,31 @@ const Login = () => {
   };
 
   return (
-    <div className="container mt-5" style={{ maxWidth: 480 }}>
-      <h3>Login</h3>
-      {err && <div className="alert alert-danger">{err}</div>}
-      <form onSubmit={submit}>
-        <div className="mb-3">
-          <label>Email</label>
-          <input className="form-control" value={email} onChange={e=>setEmail(e.target.value)} required />
+    <div className="login-page">
+      <div className="login-card">
+        <h2>Login</h2>
+        {err && <div className="message">{err}</div>}
+        <form onSubmit={submit}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit">Login</button>
+        </form>
+        <div className="register-link">
+          New user? <Link to="/register">Register here</Link>
         </div>
-        <div className="mb-3">
-          <label>Password</label>
-          <input type="password" className="form-control" value={password} onChange={e=>setPassword(e.target.value)} required />
-        </div>
-        <button className="btn btn-primary" type="submit">Login</button>
-        <div className="mt-3">New user? <Link to="/register">Register here</Link></div>
-      </form>
+      </div>
     </div>
   );
 };
