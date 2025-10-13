@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from './context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { FaBox, FaUsers, FaShoppingCart, FaRupeeSign } from 'react-icons/fa';
-import "../css/dashboard.css";
+import "./css/dashboard.css";
 
 const Dashboard = () => {
   const { auth, logout } = useContext(AuthContext);
