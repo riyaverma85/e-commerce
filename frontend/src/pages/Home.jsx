@@ -1,6 +1,7 @@
 import Carousel from "react-bootstrap/Carousel";
 import ban1 from "../images/carousel-1.jpg";
 import ban2 from "../images/carousel-2.jpg";
+import ban3 from "../images/carousal.jpeg";
 import Upperimage from "../images/fruits.jpg";
 import "../css/home.css";
 import { FaLeaf, FaSeedling, FaAppleAlt } from "react-icons/fa";
@@ -91,7 +92,7 @@ const Home = () => {
 
         {/* Slide 3 */}
         <Carousel.Item>
-          <img className="carousel-image" src={ban2} alt="Healthy Lifestyle" />
+          <img className="carousel-image" src={ban3} alt="Healthy Lifestyle" />
           <div className="carousel-overlay"></div>
           <div className="carousel-caption-left">
             <h1>Healthy Lifestyle Starts Here</h1>
