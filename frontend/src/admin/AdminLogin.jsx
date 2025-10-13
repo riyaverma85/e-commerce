@@ -1,62 +1,47 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Popup from "../components/Popup";
-import "../css/login.css";
-import axios from "axios";
+import React, { useState, useContext } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
-const AdminLogin = () => {
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [popup, setPopup] = useState({ message: "", type: "" });
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // ✅ Make sure the slash is there
-      const api = `${import.meta.env.VITE_API_URL}/admin/login`;
-      const { data } = await axios.post(api, { email, password });
+      const res = await axios.post(`${process.env.REACT_APP_API_URL || ''}/api/auth/login`, { email, password });
+      const { token, user } = res.data;
+      login(token, user);
 
-      localStorage.setItem("token", data.token);
-
-      setPopup({ message: "✅ Admin Login Successful!", type: "success" });
-
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 1500);
-
+      // if admin -> dashboard, else home or profile
+      if (user.role === 'admin') navigate('/dashboard');
+      else navigate('/');
     } catch (err) {
-      console.log(err);
-      setPopup({ message: err.response?.data?.message || "❌ Login Failed", type: "error" });
+      setError(err.response?.data?.message || 'Login failed');
     }
   };
 
   return (
-    <div className="login-container">
-      <form onSubmit={handleSubmit} className="login-card">
-        <h2>🌿 Organic Admin Login</h2>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
+    <div className="container mt-5">
+      <h3>Login</h3>
+      {error && <div className="alert alert-danger">{error}</div>}
+      <form onSubmit={handleSubmit} style={{ maxWidth: 400 }}>
+        <div className="mb-3">
+          <label className="form-label">Email</label>
+          <input type="email" className="form-control" value={email} onChange={e=>setEmail(e.target.value)} required />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Password</label>
+          <input type="password" className="form-control" value={password} onChange={e=>setPassword(e.target.value)} required />
+        </div>
+        <button className="btn btn-primary" type="submit">Login</button>
       </form>
-
-      <Popup
-        message={popup.message}
-        type={popup.type}
-        onClose={() => setPopup({ message: "", type: "" })}
-      />
     </div>
   );
 };
 
-export default AdminLogin;
+export default Login;

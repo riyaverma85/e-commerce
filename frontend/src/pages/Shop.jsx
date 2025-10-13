@@ -1,6 +1,7 @@
 import React from "react";
 import "../css/productss.css";
 import "../css/shop.css";
+
 //  Fruits image
 import product1 from "../images/product-2.jpg";
 import product2 from "../images/product-4.jpg";
@@ -104,7 +105,7 @@ const Shop= () => {
   return (
     <>
     <section className="shop-content-section">
-      <div className="container">
+      <div className="containerr">
         {/* Main Banner */}
         <div className="shop-banner">
           <h1>🌿 Explore Our Organic Products</h1>

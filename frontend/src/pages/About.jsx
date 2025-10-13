@@ -5,7 +5,7 @@ import aboutbanner from "../images/aboutbanner.jpeg";
 const About = () => {
   return (
     <section className="about-section">
-      <div className="container">
+      <div className="containerr">
         {/* Header Section */}
         <div className="about-header">
           <h1>🌿 About OrganicMart</h1>

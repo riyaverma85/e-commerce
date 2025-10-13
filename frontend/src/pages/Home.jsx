@@ -13,14 +13,55 @@ import product4 from "../images/product-4.jpg";
 import product5 from "../images/product-5.jpg";
 import product6 from "../images/product-7.jpg";
 
+import hero from "../images/about.webp";
+import image from "../images/blank.jpg";
+import { useState } from "react";
+
+const rightContent = [
+  {
+    title: "Modern Farm",
+    desc: "Made with passion by 300+ curators across the country.",
+  },
+  {
+    title: "Always Fresh",
+    desc: "Eat local, consume local, closer to nature.",
+  },
+  {
+    title: "Sustainable",
+    desc: "Chemical-free consumption IN and OUT.",
+  },
+];
+const leftContent = [
+  {
+    title: "Handmade",
+    desc: "Made with passion by 300+ curators across the country.",
+  },
+  {
+    title: "100% Natural",
+    desc: "Eat local, consume local, closer to nature.",
+  },
+  {
+    title: "Curated Products",
+    desc: "Eat local, consume local, closer to nature.",
+  },
+];
+
 const Home = () => {
+  const [hoverIndex, setHoverIndex] = useState(null);
+  const [hoverSide, setHoverSide] = useState(null);
+
+  const handleMouseEnter = (side, index) => {
+    setHoverSide(side);
+    setHoverIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoverIndex(null);
+    setHoverSide(null);
+  };
   return (
     <>
-      
-
-
-   
-    <section className="organic-carousel">
+      <section className="organic-carousel">
       <Carousel fade interval={4000} controls={true}>
         {/* Slide 1 */}
         <Carousel.Item>
@@ -147,7 +188,9 @@ const Home = () => {
     </p>
     <button>Shop Organic</button>
   </div>
-  <div className="hero-image"></div>
+  <div className="hero-imagee">
+    <img src={hero} alt="web" />
+  </div>
 </section>
 
 {/* ==============================================Fifth Section==========================================*/}
@@ -177,171 +220,59 @@ const Home = () => {
     
     {/* ==============================================Ninth Section==========================================*/}
       
-      {/* Product section */}
-      <section className="products-section">
-            <div className="container">
-              <div className="section-header">
-                <h2>Our Products</h2>
-                <p>
-                  Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam
-                  justo sed rebum vero dolor duo.
-                </p>
-              </div>
       
-              <div className="product-row">
-                {/* Product Card 1 */}
-                <div className="product-card">
-                  <div className="product-img">
-                    <img src={product1} alt="Product" /> {/* Add your image later */}
-                    <span className="product-badge">New</span>
-                  </div>
-                  <div className="product-content">
-                    <h4>Fresh Tomato</h4> {/* Product name */}
-                    <div className="price">
-                      <span className="new-price">$40.00</span> {/* New Price */}
-                      <span className="old-price">$50.00</span> {/* Old Price */}
-                    </div>
-                    <div className="product-buttons">
-                      <button className="view-btn">View Detail</button>
-                      <button className="cart-btn">Add to Cart</button>
-                    </div>
-                  </div>
-                </div>
-      
-                {/* Copy this card for more products */}
-                <div className="product-card">
-                  <div className="product-img">
-                    <img src={product2} alt="Product" />
-                    <span className="product-badge">New</span>
-                  </div>
-                  <div className="product-content">
-                    <h4>Fresh Pineapple</h4>
-                    <div className="price">
-                      <span className="new-price">$100.00</span>
-                      <span className="old-price">$120.00</span>
-                    </div>
-                    <div className="product-buttons">
-                      <button className="view-btn">View Detail</button>
-                      <button className="cart-btn">Add to Cart</button>
-                    </div>
-                  </div>
-                </div>
-      
-                <div className="product-card">
-                  <div className="product-img">
-                    <img src={product3} alt="Product" />
-                    <span className="product-badge">New</span>
-                  </div>
-                  <div className="product-content">
-                    <h4>Green Chili</h4>
-                    <div className="price">
-                      <span className="new-price">$30.00</span>
-                      <span className="old-price">$60.00</span>
-                    </div>
-                    <div className="product-buttons">
-                      <button className="view-btn">View Detail</button>
-                      <button className="cart-btn">Add to Cart</button>
-                    </div>
-                  </div>
-                </div>
-      
-                <div className="product-card">
-                  <div className="product-img">
-                    <img src={product4} alt="Product" />
-                    <span className="product-badge">New</span>
-                  </div>
-                  <div className="product-content">
-                    <h4>Fresh Strawberry</h4>
-                    <div className="price">
-                      <span className="new-price">$250.00</span>
-                      <span className="old-price">$300.00$</span>
-                    </div>
-                    <div className="product-buttons">
-                      <button className="view-btn">View Detail</button>
-                      <button className="cart-btn">Add to Cart</button>
-                    </div>
-                  </div>
-                </div>
-      
-                <div className="product-card">
-                  <div className="product-img">
-                    <img src={product5} alt="Product" />
-                    <span className="product-badge">New</span>
-                  </div>
-                  <div className="product-content">
-                    <h4>Fresh Cucumber</h4>
-                    <div className="price">
-                      <span className="new-price">$20.00</span>
-                      <span className="old-price">$30.00</span>
-                    </div>
-                    <div className="product-buttons">
-                      <button className="view-btn">View Detail</button>
-                      <button className="cart-btn">Add to Cart</button>
-                    </div>
-                  </div>
-                </div>
-      
-                <div className="product-card">
-                  <div className="product-img">
-                    <img src={product6} alt="Product" />
-                    <span className="product-badge">New</span>
-                  </div>
-                  <div className="product-content">
-                    <h4>Potato</h4>
-                    <div className="price">
-                      <span className="new-price">$40.00</span>
-                      <span className="old-price">$50.00</span>
-                    </div>
-                    <div className="product-buttons">
-                      <button className="view-btn">View Detail</button>
-                      <button className="cart-btn">Add to Cart</button>
-                    </div>
-                  </div>
-                </div>
-      
-                
-              </div>
-      
-              {/* Centered “View More” button */}
-              <div className="view-more-container">
-                <button className="view-more-btn">View More</button>
-              </div>
+          <div className="container">
+      <div className="side left">
+        {leftContent.map((item, idx) => (
+          <div
+            key={idx}
+            className="content-block"
+            onMouseEnter={() => handleMouseEnter("left", idx)}
+            onMouseLeave={handleMouseLeave}
+          >
+            <div className="hover-icon">
+              {hoverSide === "left" && hoverIndex === idx && (
+                <span className="dot"></span>
+              )}
             </div>
-          </section>
-          {/* 🌱 Features & Testimonials Section */}
-<section className="features-testimonials">
-  <div className="features-overlay">
-    <div className="features-container">
-      {/* Upper Features */}
-      <div className="features-upper">
-        <div className="feature-card">
-          <h3>Curated Products</h3>
-          <p>from Handpicked Sellers</p>
-        </div>
-        <div className="feature-card">
-          <h3>Handmade</h3>
-          <p>Made with passion by 300+ curators across the country.</p>
-        </div>
-        <div className="feature-card">
-          <h3>100% Natural</h3>
-          <p>Eat local, consume local, closer to nature.</p>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="image-wrapper">
+        <img src={image} alt="Healthy Food" />
+        <div className="circle-text">
+          <h2>Wholesome Goodness</h2>
+          <p>Naturally Curated</p>
         </div>
       </div>
 
-      {/* Lower Testimonials */}
-      <div className="testimonials">
-        <div className="testimonial-card">
-          <p>“Also Like the fact that I can pick my staples in the brown paper packs and glass containers at the zero waste section, with an idea to reduce plastic and also more convenient.”</p>
-          <h4>Smitha - Cunningham Store</h4>
-        </div>
-        <div className="testimonial-card">
-          <p>“Very happy to receive my order. Its so perfect, packing was very good and delivery is so quick also I'm very thankful to staff members.”</p>
-          <h4>Rahab Munir - The Organic Shop</h4>
-        </div>
+      <div className="side right">
+        {rightContent.map((item, idx) => (
+          <div
+            key={idx}
+            className="content-block"
+            onMouseEnter={() => handleMouseEnter("right", idx)}
+            onMouseLeave={handleMouseLeave}
+          >
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.desc}</p>
+            </div>
+            <div className="hover-icon">
+              {hoverSide === "right" && hoverIndex === idx && (
+                <span className="dot"></span>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
-  </div>
-</section>
+
 
     </>
   );

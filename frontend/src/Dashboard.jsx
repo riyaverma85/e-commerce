@@ -1,41 +1,22 @@
-
-import "./css/dashboard.css";
+// frontend/src/pages/Dashboard.jsx
+import React, { useContext } from 'react';
+import { AuthContext } from './context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
-  return (
-    <>
-    
-    <div className="dashboard-container">
-      <header className="dashboard-header">
-        <h1>🌿 Admin Dashboard</h1>
-        <button
-          onClick={() => {
-            localStorage.removeItem("token");
-            window.location.href = "/admin"; // redirect to login
-          }}
-        >
-          Logout
-        </button>
-      </header>
+  const { auth, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handleLogout = () => { logout(); navigate('/login'); };
 
-      <main className="dashboard-main">
-        <div className="cards-container">
-          <div className="card">
-            <h3>Orders</h3>
-            <p>25 New Orders</p>
-          </div>
-          <div className="card">
-            <h3>Products</h3>
-            <p>120 Products</p>
-          </div>
-          <div className="card">
-            <h3>Users</h3>
-            <p>45 Registered Users</p>
-          </div>
-        </div>
-      </main>
+  return (
+    <div className="container mt-4">
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h2>Admin Dashboard</h2>
+        <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
+      </div>
+      <p>Welcome, {auth?.user?.name || 'Admin'}</p>
+      {/* admin widgets */}
     </div>
-    </>
   );
 };
 

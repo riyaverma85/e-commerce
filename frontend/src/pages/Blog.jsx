@@ -1,7 +1,8 @@
-import React from "react";
+
 import "../css/blog.css";
 
 const Blog = () => {
+  
   const blogPosts = [
     {
       title: "10 Benefits of Eating Organic Food",
@@ -21,6 +22,8 @@ const Blog = () => {
   ];
 
   return (
+    <>
+   
     <section className="blog-section">
       <h2 className="blog-title">🌿 Our Organic Blog</h2>
       <p className="blog-subtitle">
@@ -40,6 +43,9 @@ const Blog = () => {
         ))}
       </div>
     </section>
+
+    
+    </>
   );
 };
 
