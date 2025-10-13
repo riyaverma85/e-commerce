@@ -1,26 +1,22 @@
+// backend/server.js
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const connectDB = require('./config/db');
+const { createAdminIfNotExists } = require('./controllers/authController');
 
-const express=require("express");
-const cors=require("cors");
-require("dotenv").config();
-const mongoose=require("mongoose");
-const adminRoute=require("./routes/adminRoutes");
-const bodyparser=require("body-parser");
-const app= express();
-app.use(cors())
+const authRoutes = require('./routes/authRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-//Database connection
-mongoose.connect(process.env.DBCON).then(()=>{
-    console.log("Database connected");
-})
+connectDB().then(() => createAdminIfNotExists());
 
-//body parser middleware
-app.use(bodyparser.urlencoded({extended:true}));
-app.use(bodyparser.json());
+app.get('/', (req, res) => res.send('API running'));
+app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
 
-
-app.use("/admin",adminRoute);
-const Port=process.env.PORT || 8000
-app.listen(Port,()=>{
-    console.log(`Server is running on port ${Port}`);
-})
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log('Server running on', PORT));

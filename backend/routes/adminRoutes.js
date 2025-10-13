@@ -1,7 +1,8 @@
-const express =require("express");
-const loginAdmin =require  ("../controllers/adminController");
+// backend/routes/adminRoutes.js
+const router = require('express').Router();
+const { adminDashboard } = require('../controllers/authController');
+const { protect, adminOnly } = require('../middlewares/authMiddleware');
 
-const router = express.Router();
-router.post("/login", loginAdmin.loginAdmin);
+router.get('/dashboard', protect, adminOnly, adminDashboard);
 
 module.exports = router;
