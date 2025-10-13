@@ -1,7 +1,7 @@
 /* Body background and font */
 body {
   font-family: "Poppins", sans-serif;
-  background: white;
+  background: url("../images/banner2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;
