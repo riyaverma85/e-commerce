@@ -7,12 +7,14 @@ import "../css/home.css";
 import { FaLeaf, FaSeedling, FaAppleAlt } from "react-icons/fa";
 //  Product Section
 import "../css/products.css";
-import product1 from "../images/product-1.jpg";
-import product2 from "../images/product-2.jpg";
-import product3 from "../images/product-3.jpg";
-import product4 from "../images/product-4.jpg";
-import product5 from "../images/product-5.jpg";
-import product6 from "../images/product-7.jpg";
+import { useEffect, useState, useContext } from "react";
+import axios from "axios";
+import ProductCard from "../components/ProductCard";
+import { AuthContext } from "../context/AuthContext"; // if you have it
+import { useNavigate } from "react-router-dom";
+
+const API = import.meta.env.VITE_API_URL || "";
+
 
 import hero from "../images/about.webp";
 import image from "../images/blank.jpg";
@@ -60,6 +62,54 @@ const Home = () => {
     setHoverIndex(null);
     setHoverSide(null);
   };
+  const { auth } = useContext(AuthContext); // auth.user and token
+  const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(`${API}/api/products`);
+        setProducts(res.data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetch();
+  }, []);
+
+  // Add to cart handler
+  const handleAddToCart = async (product) => {
+    try {
+      // if not logged in, redirect to login
+      const token = localStorage.getItem("token") || auth?.token;
+      if (!token) {
+        // show message then redirect
+        alert("Please login to add items to cart");
+        navigate("/login");
+        return;
+      }
+
+      await axios.post(
+        `${API}/api/cart/add`,
+        { productId: product._id, quantity: 1 },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      // Simple UI feedback
+      alert("✅ Added to cart");
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data?.message || "Failed to add to cart");
+    }
+  };
+
+  // ... your existing Home JSX (carousel, hero etc.) ...
+
   return (
     <>
       <section className="organic-carousel">
@@ -104,6 +154,22 @@ const Home = () => {
         </Carousel.Item>
       </Carousel>
     </section>
+    {/*========================= PRODUCTS GRID=========================================== */}
+      <section className="products-section">
+        <div className="container">
+          <h2>Shop Products</h2>
+          {loading ? (
+            <p>Loading products...</p>
+          ) : (
+            <div className="products-grid">
+              {products.map(p => (
+                <ProductCard key={p._id} product={p} onAdd={handleAddToCart} />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
   
 {/* ==============================================First Section======================================================= */}
 
