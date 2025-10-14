@@ -18,7 +18,7 @@ const API = import.meta.env.VITE_API_URL || "";
 
 import hero from "../images/about.webp";
 import image from "../images/blank.jpg";
-import { useState } from "react";
+
 
 const rightContent = [
   {

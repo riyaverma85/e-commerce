@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
-import Swal from 'sweetalert2'; // ✅ Add this
+import Swal from 'sweetalert2'; // 
 import "../css/login.css"
 
 const Login = () => {
