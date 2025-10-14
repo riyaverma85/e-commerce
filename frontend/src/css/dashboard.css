@@ -2,10 +2,10 @@
 .container {
   max-width: 700px;
   margin: 40px auto;
-  padding: 20px 25px;
+  padding: 25px 30px;
   background: #fff;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
   font-family: 'Poppins', sans-serif;
 }
 
@@ -13,16 +13,16 @@
 h2 {
   text-align: center;
   color: #2d572c;
-  margin-bottom: 25px;
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 600;
+  margin-bottom: 30px;
 }
 
 /* Form */
 form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 18px;
 }
 
 /* Inputs & Textarea */
@@ -31,29 +31,29 @@ input[type="number"],
 textarea,
 input[type="file"] {
   padding: 12px 15px;
-  font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  font-size: 14px;
+  transition: 0.3s;
 }
 
 input[type="text"]:focus,
 input[type="number"]:focus,
 textarea:focus {
-  border-color: #2d572c;
   outline: none;
+  border-color: #2d572c;
   box-shadow: 0 0 8px rgba(45,87,44,0.2);
+}
+
+/* Textarea */
+textarea {
+  min-height: 80px;
+  resize: vertical;
 }
 
 /* File Input */
 input[type="file"] {
   padding: 6px;
-}
-
-/* Textarea */
-textarea {
-  resize: vertical;
-  min-height: 80px;
 }
 
 /* Button */
@@ -64,14 +64,28 @@ button {
   font-weight: 500;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
   font-size: 15px;
-  transition: 0.3s ease;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 button:hover {
   background: #45a049;
   transform: scale(1.02);
+}
+
+/* Image Preview */
+.image-preview {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.image-preview img {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  object-fit: cover;
 }
 
 /* Responsive */
@@ -82,23 +96,10 @@ button:hover {
   }
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 
   button {
     font-size: 14px;
   }
-}
-/* Image Preview */
-.image-preview {
-  margin-top: 10px;
-  text-align: center;
-}
-
-.image-preview img {
-  max-width: 150px;
-  max-height: 150px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  object-fit: cover;
 }

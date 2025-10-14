@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../css/adminDashboard.css";
+import "./css/dashboard.css"
 
 const API = import.meta.env.VITE_API_URL;
 
