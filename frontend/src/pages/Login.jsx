@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
     setErr('');
     try {
-      const res = await axios.post(`${API}/api/auth/login`, { email, password });
+      const res = await axios.post(`${API}/api/admin/login`, { email, password });
       login(res.data.token, res.data.user);
 
       if (res.data.user.role === 'admin') navigate('/dashboard');
