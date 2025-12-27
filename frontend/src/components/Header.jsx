@@ -16,7 +16,7 @@ const Header = () => {
   // ✅ Profile click handler — admin → dashboard, user → profile, guest → login
   const handleProfileClick = () => {
     if (auth && auth.user) {
-      navigate(auth.user.role === 'admin' ? '/admin/dashboard' : '/profile');
+      navigate(auth.user.role === 'admin' ? '/admin/dashboard' : '/add-product');
     } else {
       navigate('/login');
     }
@@ -65,7 +65,7 @@ const Header = () => {
               {/* ✅ Updated button — now goes to dashboard if admin */}
               <button
                 className="btn btn-link me-2"
-                onClick={() => navigate(auth.user.role === 'admin' ? '/admin/dashboard' : '/profile')}
+                onClick={() => navigate(auth.user.role === 'admin' ? '/admin/dashboard' : '/add-product')}
               >
                 {auth.user.name}
               </button>
