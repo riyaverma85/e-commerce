@@ -65,7 +65,7 @@ const Header = () => {
               {/* ✅ Updated button — now goes to dashboard if admin */}
               <button
                 className="btn btn-link me-2"
-                onClick={() => navigate(auth.user.role === 'admin' ? '/dashboard' : '/profile')}
+                onClick={() => navigate(auth.user.role === 'admin' ? '/admin/dashboard' : '/profile')}
               >
                 {auth.user.name}
               </button>
