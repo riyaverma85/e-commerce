@@ -13,9 +13,13 @@ const Header = () => {
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
 
+  // ✅ Profile click handler — admin → dashboard, user → profile, guest → login
   const handleProfileClick = () => {
-    if (auth && auth.user) navigate(auth.user.role === 'admin' ? '/dashboard' : '/profile');
-    else navigate('/login');
+    if (auth && auth.user) {
+      navigate(auth.user.role === 'admin' ? '/admin/dashboard' : '/profile');
+    } else {
+      navigate('/login');
+    }
   };
 
   const handleLogout = () => {
@@ -55,11 +59,17 @@ const Header = () => {
         {/* Cart & Profile */}
         <div className="header-icons d-flex align-items-center">
           <FaCartArrowDown className="icon" />
+
           {auth && auth.user ? (
             <>
-              <button className="btn btn-link me-2" onClick={() => navigate('/profile')}>
+              {/* ✅ Updated button — now goes to dashboard if admin */}
+              <button
+                className="btn btn-link me-2"
+                onClick={() => navigate(auth.user.role === 'admin' ? '/dashboard' : '/profile')}
+              >
                 {auth.user.name}
               </button>
+
               <button className="btn btn-outline-danger btn-sm" onClick={handleLogout}>
                 Logout
               </button>

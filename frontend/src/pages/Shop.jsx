@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/productss.css";
+// import "../css/productss.css";
 import "../css/shop.css";
 
 //  Fruits image
@@ -110,7 +110,7 @@ const Shop= () => {
         <div className="shop-banner">
           <h1>🌿 Explore Our Organic Products</h1>
           <p>Fresh, healthy, and chemical-free products straight from local farms to your doorstep.</p>
-          <button className="shop-btn">Shop Now</button>
+          <button className="shop-btn" >Shop Now</button>
         </div>
 
         {/* Featured Categories */}
@@ -158,7 +158,7 @@ const Shop= () => {
       </div>
     </section>
 
-    <section className="products-section">
+    {/* <section className="products-section">
       <div className="container">
         {productsData.map((category, index) => (
           <div key={index} className="category-section">
@@ -190,7 +190,7 @@ const Shop= () => {
           <button className="view-more-btn">View More Products</button>
         </div>
       </div>
-    </section>
+    </section> */}
   </>
   );
 };

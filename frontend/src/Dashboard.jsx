@@ -1,74 +1,130 @@
-import React, { useState } from "react";
-import axios from "axios";
+// // frontend/pages/AdminDashboard.jsx
+// import { useEffect, useState } from "react";
+// import axios from "axios";
+// import "./css/dashboard.css"
+
+// const AdminDashboard = () => {
+//   const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
+//   const [stats, setStats] = useState({ users: 0, products: 0 });
+//   const [active, setActive] = useState("dashboard");
+
+//   const fetchData = async () => {
+//     const res = await axios.get(`${API}/api/admin/stats`);
+//     setStats(res.data);
+//   };
+
+//   useEffect(() => {
+//     fetchData();
+//   }, []);
+
+//   return (
+//     <div className="admin-dashboard">
+//       {/* Sidebar */}
+//       <aside className="sidebar">
+//         <h2>Admin Panel</h2>
+//         <ul>
+//           <li
+//             className={active === "dashboard" ? "active" : ""}
+//             onClick={() => setActive("dashboard")}
+//           >
+//             Dashboard
+//           </li>
+//           <li
+//             className={active === "products" ? "active" : ""}
+//             onClick={() => setActive("products")}
+//           >
+//             Products
+//           </li>
+//           <li
+//             className={active === "users" ? "active" : ""}
+//             onClick={() => setActive("users")}
+//           >
+//             Users
+//           </li>
+//           <li
+//             className={active === "orders" ? "active" : ""}
+//             onClick={() => setActive("orders")}
+//           >
+//             Orders
+//           </li>
+//         </ul>
+//       </aside>
+
+//       {/* Main Content */}
+//       <main className="main-content">
+//         {active === "dashboard" && (
+//           <div className="stats-cards">
+//             <div className="card">
+//               <h3>Total Users</h3>
+//               <p>{stats.users}</p>
+//             </div>
+//             <div className="card">
+//               <h3>Total Products</h3>
+//               <p>{stats.products}</p>
+//             </div>
+//           </div>
+//         )}
+
+//         {active === "products" && <div><h2>Products Section</h2></div>}
+//         {active === "users" && <div><h2>Users Section</h2></div>}
+//         {active === "orders" && <div><h2>Orders Section</h2></div>}
+//       </main>
+//     </div>
+//   );
+// };
+
+// export default AdminDashboard;
+// frontend/pages/AdminDashboard.jsx
+import { useState } from "react";
+import DashboardHome from "./AdminComponent/DashboardHome"
+import ProductManager from "./AdminComponent/ProductManager"
+import OrdersManager from "./AdminComponent/OrdersManager"
+import UsersManager from "./AdminComponent/UsersManager";
 import "./css/dashboard.css"
 
-const API = import.meta.env.VITE_API_URL;
-
-const AdminDashboard = () => {
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [desc, setDesc] = useState("");
-  const [image, setImage] = useState(null);
-  const [preview, setPreview] = useState(null); // for image preview
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
-    if (file) {
-      setPreview(URL.createObjectURL(file));
-    } else {
-      setPreview(null);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!image) {
-      alert("Please select an image");
-      return;
-    }
-
-    try {
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("price", price);
-      formData.append("description", desc);
-      formData.append("image", image);
-
-      const token = localStorage.getItem("token"); // admin token
-
-      const res = await axios.post(`${API}/api/products/add`, formData, {
-        headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
-      });
-
-      alert("✅ Product added successfully");
-      setName(""); setPrice(""); setDesc(""); setImage(null); setPreview(null);
-    } catch (err) {
-      console.error(err);
-      alert(err.response?.data?.message || "Error adding product");
-    }
-  };
+export default function AdminDashboard() {
+  const [active, setActive] = useState("dashboard");
 
   return (
-    <div className="container mt-4">
-      <h2>Add Product</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} required />
-        <input type="number" placeholder="Price" value={price} onChange={e => setPrice(e.target.value)} required />
-        <textarea placeholder="Description" value={desc} onChange={e => setDesc(e.target.value)} />
-        
-        {/* Image Input + Preview */}
-        <input type="file" accept="image/*" onChange={handleImageChange} required />
-        {preview && (
-          <div className="image-preview">
-            <img src={preview} alt="Preview" />
-          </div>
-        )}
+    <div className="admin-dashboard">
+      {/* Sidebar */}
+      <aside className="sidebar">
+        <h2>Admin Panel</h2>
+        <ul>
+          <li
+            className={active === "dashboard" ? "active" : ""}
+            onClick={() => setActive("dashboard")}
+          >
+            Dashboard
+          </li>
+          <li
+            className={active === "products" ? "active" : ""}
+            onClick={() => setActive("products")}
+          >
+            Products
+          </li>
+          <li
+            className={active === "users" ? "active" : ""}
+            onClick={() => setActive("users")}
+          >
+            Users
+          </li>
+          <li
+            className={active === "orders" ? "active" : ""}
+            onClick={() => setActive("orders")}
+          >
+            Orders
+          </li>
+        </ul>
+      </aside>
 
-        <button type="submit">Add Product</button>
-      </form>
+      {/* Main Content */}
+      <main className="main-content">
+        {active === "dashboard" && <DashboardHome />}
+        {active === "products" && <ProductManager />}
+        {active === "users" && <UsersManager />}
+        {active === "orders" && <OrdersManager />}
+      </main>
     </div>
   );
-};
-
-export default AdminDashboard;
+}
