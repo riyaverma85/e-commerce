@@ -1,4 +1,3 @@
-// frontend/pages/AddProduct.jsx
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -18,28 +17,83 @@ const AddProduct = () => {
     setProducts(res.data);
   };
 
+  // Fetch user's cart from backend
+  const fetchCart = async () => {
+    try {
+      const res = await axios.get(`${API}/api/cart/my`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setCart(res.data?.items || []);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   // Fetch orders
   const fetchOrders = async () => {
-    const res = await axios.get(`${API}/api/orders/my`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    setOrders(res.data);
+    try {
+      const res = await axios.get(`${API}/api/orders/my`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setOrders(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
     fetchProducts();
+    fetchCart();
     fetchOrders();
   }, []);
 
-  // Add to Cart
-  const addToCart = (p) => {
-    const exists = cart.find((x) => x._id === p._id);
-    if (exists) {
-      Swal.fire("Already added!", "This product is already in your cart.", "info");
-    } else {
-      setCart([...cart, { ...p, quantity: 1 }]);
+  // Add to cart (if you also want from dashboard)
+  const addToCart = async (p) => {
+    try {
+      await axios.post(
+        `${API}/api/cart/add`,
+        { productId: p._id, quantity: 1 },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       Swal.fire("Added!", "Product added to cart.", "success");
+      fetchCart();
+    } catch {
+      Swal.fire("Error", "Failed to add to cart.", "error");
     }
+  };
+
+  // Update quantity
+  const updateQuantity = async (id, quantity) => {
+    try {
+      await axios.put(
+        `${API}/api/cart/update/${id}`,
+        { quantity },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      fetchCart();
+    } catch {
+      Swal.fire("Error", "Failed to update quantity.", "error");
+    }
+  };
+
+  // Remove item
+  const removeItem = async (id) => {
+    try {
+      await axios.delete(`${API}/api/cart/remove/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      fetchCart();
+    } catch {
+      Swal.fire("Error", "Failed to remove item.", "error");
+    }
+  };
+
+  // Total price
+  const totalCartPrice = () => {
+    return cart.reduce(
+      (acc, item) => acc + item.product.price * item.quantity,
+      0
+    );
   };
 
   // Place Order
@@ -49,7 +103,7 @@ const AddProduct = () => {
       return;
     }
     const productsToSend = cart.map((c) => ({
-      product: c._id,
+      product: c.product._id,
       quantity: c.quantity,
     }));
 
@@ -60,16 +114,11 @@ const AddProduct = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       Swal.fire("Order Placed!", "Your order has been placed successfully!", "success");
-      setCart([]);
+      fetchCart();
       fetchOrders();
     } catch {
       Swal.fire("Error", "Failed to place order.", "error");
     }
-  };
-
-  // Total Price
-  const totalCartPrice = () => {
-    return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
   };
 
   return (
@@ -78,22 +127,13 @@ const AddProduct = () => {
       <aside className="sidebar">
         <h2>User Panel</h2>
         <ul>
-          <li
-            className={active === "shop" ? "active" : ""}
-            onClick={() => setActive("shop")}
-          >
+          <li className={active === "shop" ? "active" : ""} onClick={() => setActive("shop")}>
             🛍 Shop
           </li>
-          <li
-            className={active === "cart" ? "active" : ""}
-            onClick={() => setActive("cart")}
-          >
+          <li className={active === "cart" ? "active" : ""} onClick={() => setActive("cart")}>
             🛒 My Cart
           </li>
-          <li
-            className={active === "orders" ? "active" : ""}
-            onClick={() => setActive("orders")}
-          >
+          <li className={active === "orders" ? "active" : ""} onClick={() => setActive("orders")}>
             📦 My Orders
           </li>
         </ul>
@@ -125,27 +165,19 @@ const AddProduct = () => {
               <p>No products in cart.</p>
             ) : (
               <>
-                {cart.map((c, i) => (
-                  <div key={i} className="cart-item">
-                    <img src={c.image} alt={c.name} />
+                {cart.map((c) => (
+                  <div key={c._id} className="cart-item">
+                    <img src={c.product.image} alt={c.product.name} />
                     <div className="info">
-                      <h4>{c.name}</h4>
-                      <p>₹{c.price}</p>
+                      <h4>{c.product.name}</h4>
+                      <p>₹{c.product.price}</p>
                       <input
                         type="number"
                         min="1"
                         value={c.quantity}
-                        onChange={(e) => {
-                          const newCart = [...cart];
-                          newCart[i].quantity = Number(e.target.value);
-                          setCart(newCart);
-                        }}
+                        onChange={(e) => updateQuantity(c._id, e.target.value)}
                       />
-                      <button
-                        onClick={() => setCart(cart.filter((_, idx) => idx !== i))}
-                      >
-                        Remove
-                      </button>
+                      <button onClick={() => removeItem(c._id)}>Remove</button>
                     </div>
                   </div>
                 ))}
@@ -169,7 +201,9 @@ const AddProduct = () => {
               orders.map((o) => (
                 <div key={o._id} className="order-card">
                   <h4>Order #{o._id.slice(-5)}</h4>
-                  <p>Status: <b className={o.status}>{o.status}</b></p>
+                  <p>
+                    Status: <b className={o.status}>{o.status}</b>
+                  </p>
                   <p>Total: ₹{o.totalPrice}</p>
                   <p>Items: {o.products.map((p) => p.product.name).join(", ")}</p>
                 </div>

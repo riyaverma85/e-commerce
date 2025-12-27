@@ -86,30 +86,29 @@ const Home = () => {
   }, []);
 
   // Add to cart handler
-  const handleAddToCart = async (product) => {
-    try {
-      // if not logged in, redirect to login
-      const token = localStorage.getItem("token") || auth?.token;
-      if (!token) {
-        // show message then redirect
-        Swal.fire("Please login to add items to cart");
-        navigate("/login");
-        return;
-      }
-
-      await axios.post(
-        `${API}/api/cart/add`,
-        { productId: product._id, quantity: 1 },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      // Simple UI feedback
-      Swal.fire("✅ Added to cart");
-    } catch (err) {
-      console.error(err);
-      Swal.fire(err.response?.data?.message || "Failed to add to cart");
+ // Add to cart using backend API
+const handleAddToCart = async (product) => {
+  try {
+    const token = localStorage.getItem("token") || auth?.token;
+    if (!token) {
+      Swal.fire("Please login to add items to cart");
+      navigate("/login");
+      return;
     }
-  };
+
+    await axios.post(
+      `${API}/api/cart/add`,
+      { productId: product._id, quantity: 1 },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    Swal.fire("✅ Added to cart successfully!");
+  } catch (err) {
+    console.error(err);
+    Swal.fire(err.response?.data?.message || "Failed to add to cart");
+  }
+};
+
 
   // ... your existing Home JSX (carousel, hero etc.) ...
 
