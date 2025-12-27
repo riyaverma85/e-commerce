@@ -3,10 +3,12 @@ import ban1 from "../images/carousel-1.jpg";
 import ban2 from "../images/carousel-2.jpg";
 import ban3 from "../images/carousal.jpeg";
 import Upperimage from "../images/fruits.jpg";
+import Swal from "sweetalert2";
 import "../css/home.css";
+
 import { FaLeaf, FaSeedling, FaAppleAlt } from "react-icons/fa";
 //  Product Section
-import "../css/products.css";
+
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
@@ -62,6 +64,7 @@ const Home = () => {
     setHoverIndex(null);
     setHoverSide(null);
   };
+
   const { auth } = useContext(AuthContext); // auth.user and token
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
@@ -89,7 +92,7 @@ const Home = () => {
       const token = localStorage.getItem("token") || auth?.token;
       if (!token) {
         // show message then redirect
-        alert("Please login to add items to cart");
+        Swal.fire("Please login to add items to cart");
         navigate("/login");
         return;
       }
@@ -101,10 +104,10 @@ const Home = () => {
       );
 
       // Simple UI feedback
-      alert("✅ Added to cart");
+      Swal.fire("✅ Added to cart");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Failed to add to cart");
+      Swal.fire(err.response?.data?.message || "Failed to add to cart");
     }
   };
 
@@ -154,7 +157,7 @@ const Home = () => {
         </Carousel.Item>
       </Carousel>
     </section>
-    {/*========================= PRODUCTS GRID=========================================== */}
+    {/*============================== PRODUCTS GRID=========================================== */}
       <section className="products-section">
         <div className="container">
           <h2>Shop Products</h2>
