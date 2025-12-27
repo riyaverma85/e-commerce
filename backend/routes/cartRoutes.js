@@ -1,12 +1,76 @@
-import express from "express";
-import { addToCart, getCart, updateCartItem, removeCartItem } from "../controllers/cartController.js";
-import { protect } from "../middleware/authMiddleware.js"; // your JWT middleware
-
+const express = require("express");
 const router = express.Router();
+const { authMiddleware } = require("../middleware/auth");
+const Cart = require("../models/Cart");
+const Product = require("../models/Product");
 
-router.post("/add", protect, addToCart);
-router.get("/", protect, getCart);
-router.put("/update", protect, updateCartItem); // { productId, quantity }
-router.delete("/remove/:productId", protect, removeCartItem);
+// ➕ Add to Cart
+router.post("/add", authMiddleware, async (req, res) => {
+  const { productId, quantity } = req.body;
+  const userId = req.user.id;
 
-export default router;
+  try {
+    let cart = await Cart.findOne({ user: userId });
+    if (!cart) cart = new Cart({ user: userId, items: [] });
+
+    const existing = cart.items.find(
+      (item) => item.product.toString() === productId
+    );
+
+    if (existing) {
+      existing.quantity += quantity;
+    } else {
+      cart.items.push({ product: productId, quantity });
+    }
+
+    await cart.save();
+    res.json(await cart.populate("items.product"));
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to add to cart" });
+  }
+});
+
+// 🛍 Get My Cart
+router.get("/my", authMiddleware, async (req, res) => {
+  try {
+    const cart = await Cart.findOne({ user: req.user.id }).populate("items.product");
+    res.json(cart || { items: [] });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch cart" });
+  }
+});
+
+// ❌ Remove Item
+router.delete("/remove/:id", authMiddleware, async (req, res) => {
+  try {
+    const cart = await Cart.findOne({ user: req.user.id });
+    if (!cart) return res.status(404).json({ message: "Cart not found" });
+
+    cart.items = cart.items.filter((item) => item._id.toString() !== req.params.id);
+    await cart.save();
+    res.json(await cart.populate("items.product"));
+  } catch (err) {
+    res.status(500).json({ message: "Failed to remove item" });
+  }
+});
+
+// 🔄 Update Quantity
+router.put("/update/:id", authMiddleware, async (req, res) => {
+  const { quantity } = req.body;
+  try {
+    const cart = await Cart.findOne({ user: req.user.id });
+    if (!cart) return res.status(404).json({ message: "Cart not found" });
+
+    const item = cart.items.id(req.params.id);
+    if (!item) return res.status(404).json({ message: "Item not found" });
+
+    item.quantity = quantity;
+    await cart.save();
+    res.json(await cart.populate("items.product"));
+  } catch (err) {
+    res.status(500).json({ message: "Failed to update quantity" });
+  }
+});
+
+module.exports = router;
