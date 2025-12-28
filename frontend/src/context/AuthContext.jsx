@@ -9,6 +9,8 @@ export const AuthProvider = ({ children }) => {
     user: JSON.parse(localStorage.getItem('user')) || null
   });
 
+  const [cartCount, setCartCount] = useState(0);
+
   useEffect(() => {
     if (auth.token) localStorage.setItem('token', auth.token);
     else localStorage.removeItem('token');
@@ -18,10 +20,13 @@ export const AuthProvider = ({ children }) => {
   }, [auth]);
 
   const login = (token, user) => setAuth({ token, user });
-  const logout = () => setAuth({ token: null, user: null });
+  const logout = () => {
+    setAuth({ token: null, user: null });
+    setCartCount(0);
+  };
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout }}>
+    <AuthContext.Provider value={{ auth, login, logout, cartCount, setCartCount }}>
       {children}
     </AuthContext.Provider>
   );

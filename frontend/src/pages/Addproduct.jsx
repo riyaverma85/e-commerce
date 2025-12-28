@@ -163,8 +163,9 @@ const addToCart = async (p) => {
             🛍 Shop
           </li>
           <li className={active === "cart" ? "active" : ""} onClick={() => setActive("cart")}>
-            🛒 My Cart
+            🛒 My Cart {cart.length > 0 && `(${cart.length})`}
           </li>
+
           <li className={active === "orders" ? "active" : ""} onClick={() => setActive("orders")}>
             📦 My Orders
           </li>
