@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { authMiddleware } = require("../middleware/auth");
-const Cart = require("../models/Cart");
+const { protect } = require("../middlewares/authMiddleware");
 const Product = require("../models/Product");
 
 // ➕ Add to Cart
-router.post("/add", authMiddleware, async (req, res) => {
+router.post("/add", protect, async (req, res) => {
   const { productId, quantity } = req.body;
   const userId = req.user.id;
 
@@ -32,7 +31,7 @@ router.post("/add", authMiddleware, async (req, res) => {
 });
 
 // 🛍 Get My Cart
-router.get("/my", authMiddleware, async (req, res) => {
+router.get("/my", protect, async (req, res) => {
   try {
     const cart = await Cart.findOne({ user: req.user.id }).populate("items.product");
     res.json(cart || { items: [] });
@@ -42,7 +41,7 @@ router.get("/my", authMiddleware, async (req, res) => {
 });
 
 // ❌ Remove Item
-router.delete("/remove/:id", authMiddleware, async (req, res) => {
+router.delete("/remove/:id", protect, async (req, res) => {
   try {
     const cart = await Cart.findOne({ user: req.user.id });
     if (!cart) return res.status(404).json({ message: "Cart not found" });
@@ -56,7 +55,7 @@ router.delete("/remove/:id", authMiddleware, async (req, res) => {
 });
 
 // 🔄 Update Quantity
-router.put("/update/:id", authMiddleware, async (req, res) => {
+router.put("/update/:id", protect, async (req, res) => {
   const { quantity } = req.body;
   try {
     const cart = await Cart.findOne({ user: req.user.id });
