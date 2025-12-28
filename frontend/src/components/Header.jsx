@@ -1,4 +1,3 @@
-// frontend/src/components/Header.jsx
 import { useContext, useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { FaCartArrowDown } from 'react-icons/fa';
@@ -10,33 +9,27 @@ import axios from 'axios';
 import "../css/header.css";
 
 const Header = () => {
-  const { auth, logout } = useContext(AuthContext);
+  const { auth, logout, cartCount, setCartCount } = useContext(AuthContext);
   const [search, setSearch] = useState('');
-  const [cartCount, setCartCount] = useState(0);
   const navigate = useNavigate();
   const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
-  //  Fetch cart count from backend
   const fetchCartCount = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
+    if (!auth?.token) return;
     try {
       const res = await axios.get(`${API}/api/cart/my`, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${auth.token}` },
       });
-      const count = res.data?.items?.length || 0;
-      setCartCount(count);
+      setCartCount(res.data?.items?.length || 0);
     } catch (err) {
       console.error("Cart fetch failed", err);
     }
   };
 
-  //  Fetch when user logs in or page refreshes
   useEffect(() => {
-    if (auth?.user) fetchCartCount();
+    fetchCartCount();
   }, [auth]);
 
-  //  Profile click handler
   const handleProfileClick = () => {
     if (auth && auth.user) {
       navigate(auth.user.role === 'admin' ? '/admin/dashboard' : '/add-product');
@@ -45,14 +38,11 @@ const Header = () => {
     }
   };
 
-  //  Logout
   const handleLogout = () => {
     logout();
-    setCartCount(0);
     navigate('/');
   };
 
-  //  Search
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (search.trim() !== '') {
@@ -64,18 +54,11 @@ const Header = () => {
   return (
     <header className="header shadow-sm py-2">
       <Container fluid className="d-flex align-items-center justify-content-between flex-wrap">
-        
-        {/*  Logo */}
-        <div
-          className="d-flex align-items-center"
-          style={{ cursor: 'pointer' }}
-          onClick={() => navigate('/')}
-        >
+        <div className="d-flex align-items-center" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
           <img src={logo} alt="logo" className="header-logo" />
           <h3 className="brand-name ms-2">OrganicMart</h3>
         </div>
 
-        {/*  Search Bar */}
         <form className="search-container" onSubmit={handleSearchSubmit}>
           <input
             type="text"
@@ -86,7 +69,6 @@ const Header = () => {
           <button type="submit"></button>
         </form>
 
-        {/* 🛒 Cart & 👤 Profile */}
         <div className="header-icons d-flex align-items-center">
           <div className="cart-icon-wrapper" onClick={() => navigate('/add-product')}>
             <FaCartArrowDown className="icon" />
@@ -97,13 +79,10 @@ const Header = () => {
             <>
               <button
                 className="btn btn-link me-2"
-                onClick={() =>
-                  navigate(auth.user.role === 'admin' ? '/admin/dashboard' : '/add-product')
-                }
+                onClick={() => navigate(auth.user.role === 'admin' ? '/admin/dashboard' : '/add-product')}
               >
                 {auth.user.name}
               </button>
-
               <button className="btn btn-outline-danger btn-sm" onClick={handleLogout}>
                 Logout
               </button>
