@@ -1,19 +1,42 @@
 // frontend/src/components/Header.jsx
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { FaCartArrowDown } from 'react-icons/fa';
 import { IoPersonCircle } from 'react-icons/io5';
 import logo from '../images/logo2.jpg';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import "../css/header.css"
+import axios from 'axios';
+import "../css/header.css";
 
 const Header = () => {
   const { auth, logout } = useContext(AuthContext);
   const [search, setSearch] = useState('');
+  const [cartCount, setCartCount] = useState(0);
   const navigate = useNavigate();
+  const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
-  // ✅ Profile click handler — admin → dashboard, user → profile, guest → login
+  //  Fetch cart count from backend
+  const fetchCartCount = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    try {
+      const res = await axios.get(`${API}/api/cart/my`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const count = res.data?.items?.length || 0;
+      setCartCount(count);
+    } catch (err) {
+      console.error("Cart fetch failed", err);
+    }
+  };
+
+  //  Fetch when user logs in or page refreshes
+  useEffect(() => {
+    if (auth?.user) fetchCartCount();
+  }, [auth]);
+
+  //  Profile click handler
   const handleProfileClick = () => {
     if (auth && auth.user) {
       navigate(auth.user.role === 'admin' ? '/admin/dashboard' : '/add-product');
@@ -22,11 +45,14 @@ const Header = () => {
     }
   };
 
+  //  Logout
   const handleLogout = () => {
     logout();
+    setCartCount(0);
     navigate('/');
   };
 
+  //  Search
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (search.trim() !== '') {
@@ -39,13 +65,17 @@ const Header = () => {
     <header className="header shadow-sm py-2">
       <Container fluid className="d-flex align-items-center justify-content-between flex-wrap">
         
-        {/* Logo */}
-        <div className="d-flex align-items-center" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
+        {/*  Logo */}
+        <div
+          className="d-flex align-items-center"
+          style={{ cursor: 'pointer' }}
+          onClick={() => navigate('/')}
+        >
           <img src={logo} alt="logo" className="header-logo" />
           <h3 className="brand-name ms-2">OrganicMart</h3>
         </div>
 
-        {/* Search Bar */}
+        {/*  Search Bar */}
         <form className="search-container" onSubmit={handleSearchSubmit}>
           <input
             type="text"
@@ -56,16 +86,20 @@ const Header = () => {
           <button type="submit"></button>
         </form>
 
-        {/* Cart & Profile */}
+        {/* 🛒 Cart & 👤 Profile */}
         <div className="header-icons d-flex align-items-center">
-          <FaCartArrowDown className="icon" />
+          <div className="cart-icon-wrapper" onClick={() => navigate('/add-product')}>
+            <FaCartArrowDown className="icon" />
+            {cartCount > 0 && <span className="cart-count-badge">{cartCount}</span>}
+          </div>
 
           {auth && auth.user ? (
             <>
-              {/* ✅ Updated button — now goes to dashboard if admin */}
               <button
                 className="btn btn-link me-2"
-                onClick={() => navigate(auth.user.role === 'admin' ? '/admin/dashboard' : '/add-product')}
+                onClick={() =>
+                  navigate(auth.user.role === 'admin' ? '/admin/dashboard' : '/add-product')
+                }
               >
                 {auth.user.name}
               </button>
