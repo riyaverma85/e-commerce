@@ -48,19 +48,51 @@ const AddProduct = () => {
   }, []);
 
   // Add to cart (if you also want from dashboard)
-  const addToCart = async (p) => {
-    try {
-      await axios.post(
-        `${API}/api/cart/add`,
-        { productId: p._id, quantity: 1 },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      Swal.fire("Added!", "Product added to cart.", "success");
-      fetchCart();
-    } catch {
-      Swal.fire("Error", "Failed to add to cart.", "error");
+  //  Add to cart with working "Already Added" alert
+const addToCart = async (p) => {
+  try {
+    console.log("Current cart:", cart); 
+    console.log("Adding product:", p._id); 
+
+    // Safe check: handle both populated & plain product IDs
+    const already = cart.find((item) => {
+      const id = item.product?._id || item.product; // handle both object or string
+      return id === p._id;
+    });
+
+    if (already) {
+      Swal.fire({
+        icon: "info",
+        title: "Already Added!",
+        text: "This product is already in your cart.",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+      return;
     }
-  };
+
+    // Add new product to cart
+    await axios.post(
+      `${API}/api/cart/add`,
+      { productId: p._id, quantity: 1 },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    Swal.fire({
+      icon: "success",
+      title: "Added!",
+      text: "Product added to cart.",
+      timer: 1500,
+      showConfirmButton: false,
+    });
+
+    fetchCart(); // Refresh cart
+  } catch (err) {
+    console.error(err);
+    Swal.fire("Error", "Failed to add to cart.", "error");
+  }
+};
+
 
   // Update quantity
   const updateQuantity = async (id, quantity) => {
