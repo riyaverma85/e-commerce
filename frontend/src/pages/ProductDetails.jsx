@@ -2,19 +2,18 @@ import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-import "../css/productdetails.css";
 import { AuthContext } from "../context/AuthContext";
+import "../css/productdetails.css";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 const ProductDetails = () => {
   const { id } = useParams();
+  const { auth, setCartCount } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { auth, cartCount, setCartCount } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // Fetch product details
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -29,31 +28,34 @@ const ProductDetails = () => {
     fetchProduct();
   }, [id]);
 
-  // Add to cart handler
   const handleAddToCart = async () => {
-    if (!auth || !auth.token) {
-      Swal.fire({
-        title: "Login Required",
-        text: "You need to login first to add items to the cart.",
-        icon: "info",
-        confirmButtonText: "Login",
-      }).then(() => {
-        navigate("/login");
-      });
+    const token = auth?.token || localStorage.getItem("token");
+
+    if (!token) {
+      // Redirect to login with return URL
+      navigate("/login", { state: { from: `/product/${id}` } });
       return;
     }
 
     try {
       const res = await axios.post(
         `${API}/api/cart/add`,
-        { productId: id },
-        { headers: { Authorization: `Bearer ${auth.token}` } }
+        { productId: product._id, quantity: 1 },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-      setCartCount(res.data.items.length); // update cart count
-      Swal.fire("Added!", "Product added to your cart.", "success");
+
+      // Update cart count in context
+      setCartCount(res.data?.items?.length || 0);
+
+      Swal.fire({
+        icon: "success",
+        title: "Added!",
+        text: "Product added to cart successfully!",
+        timer: 1500,
+        showConfirmButton: false,
+      });
     } catch (err) {
-      Swal.fire("Error", "Failed to add product to cart", "error");
-      console.error(err);
+      Swal.fire("Error", err.response?.data?.message || "Failed to add to cart", "error");
     }
   };
 

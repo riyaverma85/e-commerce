@@ -11,20 +11,19 @@ const AddProduct = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [orders, setOrders] = useState([]);
-
   const token = auth?.token;
 
-  // Fetch products
+  // 🟢 Fetch all products
   const fetchProducts = async () => {
     try {
       const res = await axios.get(`${API}/api/products`);
       setProducts(res.data);
     } catch (err) {
-      console.error(err);
+      console.error("Error fetching products:", err);
     }
   };
 
-  // Fetch cart
+  // 🟡 Fetch cart
   const fetchCart = async () => {
     if (!token) return;
     try {
@@ -34,11 +33,11 @@ const AddProduct = () => {
       setCart(res.data?.items || []);
       setCartCount(res.data?.items?.length || 0);
     } catch (err) {
-      console.error(err);
+      console.error("Error fetching cart:", err);
     }
   };
 
-  // Fetch orders
+  // 🟣 Fetch orders
   const fetchOrders = async () => {
     if (!token) return;
     try {
@@ -47,7 +46,7 @@ const AddProduct = () => {
       });
       setOrders(res.data);
     } catch (err) {
-      console.error(err);
+      console.error("Error fetching orders:", err);
     }
   };
 
@@ -57,7 +56,7 @@ const AddProduct = () => {
     fetchOrders();
   }, [token]);
 
-  // Add to cart with "Already Added" check
+  // 🛒 Add to cart
   const addToCart = async (p) => {
     if (!token) {
       Swal.fire("Please login first!");
@@ -94,14 +93,14 @@ const AddProduct = () => {
         showConfirmButton: false,
       });
 
-      fetchCart(); // refresh cart and update cartCount
+      fetchCart();
     } catch (err) {
-      console.error(err);
+      console.error("Error adding to cart:", err);
       Swal.fire("Error", "Failed to add to cart.", "error");
     }
   };
 
-  // Update quantity
+  // 🔄 Update quantity
   const updateQuantity = async (id, quantity) => {
     try {
       await axios.put(
@@ -115,7 +114,7 @@ const AddProduct = () => {
     }
   };
 
-  // Remove item
+  // ❌ Remove item
   const removeItem = async (id) => {
     try {
       await axios.delete(`${API}/api/cart/remove/${id}`, {
@@ -127,21 +126,25 @@ const AddProduct = () => {
     }
   };
 
-  // Total price
+  // 💰 Total cart price
   const totalCartPrice = () =>
-    cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+    cart
+      .filter((c) => c.product)
+      .reduce((acc, item) => acc + item.product.price * item.quantity, 0);
 
-  // Place order
+  // 🧾 Place order
   const placeOrder = async () => {
     if (!cart.length) {
       Swal.fire("Empty Cart", "Please add products first.", "info");
       return;
     }
 
-    const productsToSend = cart.map((c) => ({
-      product: c.product._id,
-      quantity: c.quantity,
-    }));
+    const productsToSend = cart
+      .filter((c) => c.product)
+      .map((c) => ({
+        product: c.product._id,
+        quantity: c.quantity,
+      }));
 
     try {
       await axios.post(
@@ -149,6 +152,7 @@ const AddProduct = () => {
         { products: productsToSend, totalPrice: totalCartPrice() },
         { headers: { Authorization: `Bearer ${token}` } }
       );
+
       Swal.fire("Order Placed!", "Your order has been placed successfully!", "success");
       fetchCart();
       fetchOrders();
@@ -186,6 +190,7 @@ const AddProduct = () => {
 
       {/* Main Content */}
       <main className="main-content">
+        {/* 🛍 SHOP */}
         {active === "shop" && (
           <div className="shop-section">
             <h2>Organic Products</h2>
@@ -196,6 +201,7 @@ const AddProduct = () => {
                   <h4>{p.name}</h4>
                   <p>{p.description}</p>
                   <b>₹{p.price}</b>
+                  <p className="category">Category: {p.category}</p>
                   <button onClick={() => addToCart(p)}>Add to Cart</button>
                 </div>
               ))}
@@ -203,29 +209,34 @@ const AddProduct = () => {
           </div>
         )}
 
+        {/* 🛒 CART */}
         {active === "cart" && (
           <div className="cart-section">
             <h2>My Cart</h2>
-            {cart.length === 0 ? (
+            {cart.filter((c) => c.product).length === 0 ? (
               <p>No products in cart.</p>
             ) : (
               <>
-                {cart.map((c) => (
-                  <div key={c._id} className="cart-item">
-                    <img src={c.product.image} alt={c.product.name} />
-                    <div className="info">
-                      <h4>{c.product.name}</h4>
-                      <p>₹{c.product.price}</p>
-                      <input
-                        type="number"
-                        min="1"
-                        value={c.quantity}
-                        onChange={(e) => updateQuantity(c._id, e.target.value)}
-                      />
-                      <button onClick={() => removeItem(c._id)}>Remove</button>
+                {cart
+                  .filter((c) => c.product)
+                  .map((c) => (
+                    <div key={c._id} className="cart-item">
+                      <img src={c.product?.image} alt={c.product?.name} />
+                      <div className="info">
+                        <h4>{c.product?.name || "Deleted Product"}</h4>
+                        <p>₹{c.product?.price || 0}</p>
+                        <input
+                          type="number"
+                          min="1"
+                          value={c.quantity}
+                          onChange={(e) =>
+                            updateQuantity(c._id, e.target.value)
+                          }
+                        />
+                        <button onClick={() => removeItem(c._id)}>Remove</button>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
                 <div className="cart-summary">
                   <h3>Total: ₹{totalCartPrice()}</h3>
                   <button className="place-btn" onClick={placeOrder}>
@@ -237,6 +248,7 @@ const AddProduct = () => {
           </div>
         )}
 
+        {/* 📦 ORDERS */}
         {active === "orders" && (
           <div className="orders-section">
             <h2>My Orders</h2>
@@ -250,7 +262,13 @@ const AddProduct = () => {
                     Status: <b className={o.status}>{o.status}</b>
                   </p>
                   <p>Total: ₹{o.totalPrice}</p>
-                  <p>Items: {o.products.map((p) => p.product.name).join(", ")}</p>
+                  <p>
+                    Items:{" "}
+                    {o.products
+                      .filter((p) => p.product)
+                      .map((p) => p.product.name)
+                      .join(", ")}
+                  </p>
                 </div>
               ))
             )}

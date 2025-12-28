@@ -4,31 +4,42 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import "../css/productManager.css";
 
-const ProductManager=() =>{
+const ProductManager = () => {
   const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
   const token = localStorage.getItem("token");
 
   const [products, setProducts] = useState([]);
-  const [form, setForm] = useState({ name: "", description: "", price: "" });
+  const [form, setForm] = useState({ name: "", description: "", price: "", category: "" });
   const [image, setImage] = useState(null);
-  const [editProduct, setEditProduct] = useState(null); // ✅ to store current product being edited
+  const [editProduct, setEditProduct] = useState(null);
 
+  // Fetch all products
   const fetchProducts = async () => {
-    const res = await axios.get(`${API}/api/products`);
-    setProducts(res.data);
+    try {
+      const res = await axios.get(`${API}/api/products`);
+      setProducts(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  // ✅ Add product
+  // Add new product
   const handleAddProduct = async (e) => {
     e.preventDefault();
+    if (!form.category) {
+      Swal.fire("❌ Error", "Please select a category", "error");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("name", form.name);
     formData.append("description", form.description);
     formData.append("price", form.price);
+    formData.append("category", form.category);
     if (image) formData.append("image", image);
 
     try {
@@ -36,7 +47,7 @@ const ProductManager=() =>{
         headers: { Authorization: `Bearer ${token}` },
       });
       Swal.fire("✅ Success", "Product Added!", "success");
-      setForm({ name: "", description: "", price: "" });
+      setForm({ name: "", description: "", price: "", category: "" });
       setImage(null);
       fetchProducts();
     } catch (err) {
@@ -44,7 +55,48 @@ const ProductManager=() =>{
     }
   };
 
-  // ✅ Delete product
+  // Edit product click
+  const handleEditClick = (product) => {
+    setEditProduct(product);
+    setForm({
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      category: product.category || "",
+    });
+    setImage(null);
+  };
+
+  // Update product
+  const handleUpdateProduct = async (e) => {
+    e.preventDefault();
+    if (!form.category) {
+      Swal.fire("❌ Error", "Please select a category", "error");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("name", form.name);
+    formData.append("description", form.description);
+    formData.append("price", form.price);
+    formData.append("category", form.category);
+    if (image) formData.append("image", image);
+
+    try {
+      await axios.put(`${API}/api/products/${editProduct._id}`, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      Swal.fire("✅ Updated", "Product updated successfully!", "success");
+      setEditProduct(null);
+      setForm({ name: "", description: "", price: "", category: "" });
+      setImage(null);
+      fetchProducts();
+    } catch (err) {
+      Swal.fire("❌ Error", "Failed to update product", "error");
+    }
+  };
+
+  // Delete product
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -62,43 +114,14 @@ const ProductManager=() =>{
     });
   };
 
-  // ✅ Open edit form
-  const handleEditClick = (product) => {
-    setEditProduct(product);
-    setForm({
-      name: product.name,
-      description: product.description,
-      price: product.price,
-    });
-    setImage(null);
-  };
-
-  // ✅ Submit edited product
-  const handleUpdateProduct = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("name", form.name);
-    formData.append("description", form.description);
-    formData.append("price", form.price);
-    if (image) formData.append("image", image);
-
-    try {
-      await axios.put(`${API}/api/products/${editProduct._id}`, formData, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      Swal.fire("✅ Updated", "Product updated successfully!", "success");
-      setEditProduct(null);
-      fetchProducts();
-    } catch (err) {
-      Swal.fire("❌ Error", "Failed to update product", "error");
-    }
-  };
-
   return (
     <div className="product-manager">
       <h2>{editProduct ? "Edit Product" : "Add Product"}</h2>
 
-      <form className="product-form" onSubmit={editProduct ? handleUpdateProduct : handleAddProduct}>
+      <form
+        className="product-form"
+        onSubmit={editProduct ? handleUpdateProduct : handleAddProduct}
+      >
         <input
           type="text"
           placeholder="Name"
@@ -119,6 +142,17 @@ const ProductManager=() =>{
           onChange={(e) => setForm({ ...form, price: e.target.value })}
           required
         />
+        {/* Category dropdown */}
+        <select
+          value={form.category}
+          onChange={(e) => setForm({ ...form, category: e.target.value })}
+          required
+        >
+          <option value="">Select Category</option>
+          <option value="fruits">Fruits</option>
+          <option value="vegetables">Vegetables</option>
+          <option value="dairy">Dairy</option>
+        </select>
         <input type="file" onChange={(e) => setImage(e.target.files[0])} />
         <button type="submit">{editProduct ? "Update Product" : "Add Product"}</button>
         {editProduct && (
@@ -127,7 +161,7 @@ const ProductManager=() =>{
             style={{ marginLeft: "10px", background: "gray" }}
             onClick={() => {
               setEditProduct(null);
-              setForm({ name: "", description: "", price: "" });
+              setForm({ name: "", description: "", price: "", category: "" });
               setImage(null);
             }}
           >
@@ -143,6 +177,7 @@ const ProductManager=() =>{
             <img src={p.image} alt={p.name} />
             <h4>{p.name}</h4>
             <p>₹{p.price}</p>
+            <p>Category: {p.category}</p>
             <div className="btn-group">
               <button onClick={() => handleEditClick(p)}>✏️ Edit</button>
               <button onClick={() => handleDelete(p._id)}>🗑️ Delete</button>
@@ -152,5 +187,6 @@ const ProductManager=() =>{
       </div>
     </div>
   );
-}
-export default  ProductManager;
+};
+
+export default ProductManager;
