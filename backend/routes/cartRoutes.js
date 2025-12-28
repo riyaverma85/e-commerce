@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { protect } = require("../middlewares/authMiddleware");
 const Product = require("../models/Product");
+const Cart = require("../models/Cart");
 
 // ➕ Add to Cart
 router.post("/add", protect, async (req, res) => {

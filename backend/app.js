@@ -10,6 +10,8 @@ const adminRoutes = require('./routes/adminRoutes');
 const productRoutes =require("./routes/productRoutes")
 const orderRoutes =require("./routes/orderRoutes")
 const cartRoutes = require("./routes/cartRoutes");
+const contactRoutes = require("./routes/contactRoutes");
+
 
 
 
@@ -25,6 +27,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/products',productRoutes)
 app.use('/api/orders',orderRoutes)
 app.use("/api/cart", cartRoutes);
+app.use("/api/contact", contactRoutes);
 
 
 console.log("Cloudinary Config:", process.env.CLOUDINARY_CLOUD_NAME);
