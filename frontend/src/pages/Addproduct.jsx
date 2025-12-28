@@ -1,29 +1,38 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import "../css/addproduct.css";
+import { AuthContext } from "../context/AuthContext";
 
 const AddProduct = () => {
   const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
+  const { auth, cartCount, setCartCount } = useContext(AuthContext);
   const [active, setActive] = useState("shop");
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [orders, setOrders] = useState([]);
-  const token = localStorage.getItem("token");
+
+  const token = auth?.token;
 
   // Fetch products
   const fetchProducts = async () => {
-    const res = await axios.get(`${API}/api/products`);
-    setProducts(res.data);
+    try {
+      const res = await axios.get(`${API}/api/products`);
+      setProducts(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  // Fetch user's cart from backend
+  // Fetch cart
   const fetchCart = async () => {
+    if (!token) return;
     try {
       const res = await axios.get(`${API}/api/cart/my`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCart(res.data?.items || []);
+      setCartCount(res.data?.items?.length || 0);
     } catch (err) {
       console.error(err);
     }
@@ -31,6 +40,7 @@ const AddProduct = () => {
 
   // Fetch orders
   const fetchOrders = async () => {
+    if (!token) return;
     try {
       const res = await axios.get(`${API}/api/orders/my`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -45,20 +55,18 @@ const AddProduct = () => {
     fetchProducts();
     fetchCart();
     fetchOrders();
-  }, []);
+  }, [token]);
 
-  // Add to cart (if you also want from dashboard)
-  //  Add to cart with working "Already Added" alert
-const addToCart = async (p) => {
-  try {
-    console.log("Current cart:", cart); 
-    console.log("Adding product:", p._id); 
+  // Add to cart with "Already Added" check
+  const addToCart = async (p) => {
+    if (!token) {
+      Swal.fire("Please login first!");
+      return;
+    }
 
-    // Safe check: handle both populated & plain product IDs
-    const already = cart.find((item) => {
-      const id = item.product?._id || item.product; // handle both object or string
-      return id === p._id;
-    });
+    const already = cart.find(
+      (item) => (item.product?._id || item.product) === p._id
+    );
 
     if (already) {
       Swal.fire({
@@ -71,28 +79,27 @@ const addToCart = async (p) => {
       return;
     }
 
-    // Add new product to cart
-    await axios.post(
-      `${API}/api/cart/add`,
-      { productId: p._id, quantity: 1 },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+    try {
+      await axios.post(
+        `${API}/api/cart/add`,
+        { productId: p._id, quantity: 1 },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
-    Swal.fire({
-      icon: "success",
-      title: "Added!",
-      text: "Product added to cart.",
-      timer: 1500,
-      showConfirmButton: false,
-    });
+      Swal.fire({
+        icon: "success",
+        title: "Added!",
+        text: "Product added to cart.",
+        timer: 1500,
+        showConfirmButton: false,
+      });
 
-    fetchCart(); // Refresh cart
-  } catch (err) {
-    console.error(err);
-    Swal.fire("Error", "Failed to add to cart.", "error");
-  }
-};
-
+      fetchCart(); // refresh cart and update cartCount
+    } catch (err) {
+      console.error(err);
+      Swal.fire("Error", "Failed to add to cart.", "error");
+    }
+  };
 
   // Update quantity
   const updateQuantity = async (id, quantity) => {
@@ -121,19 +128,16 @@ const addToCart = async (p) => {
   };
 
   // Total price
-  const totalCartPrice = () => {
-    return cart.reduce(
-      (acc, item) => acc + item.product.price * item.quantity,
-      0
-    );
-  };
+  const totalCartPrice = () =>
+    cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
 
-  // Place Order
+  // Place order
   const placeOrder = async () => {
-    if (cart.length === 0) {
+    if (!cart.length) {
       Swal.fire("Empty Cart", "Please add products first.", "info");
       return;
     }
+
     const productsToSend = cart.map((c) => ({
       product: c.product._id,
       quantity: c.quantity,
@@ -159,14 +163,22 @@ const addToCart = async (p) => {
       <aside className="sidebar">
         <h2>User Panel</h2>
         <ul>
-          <li className={active === "shop" ? "active" : ""} onClick={() => setActive("shop")}>
+          <li
+            className={active === "shop" ? "active" : ""}
+            onClick={() => setActive("shop")}
+          >
             🛍 Shop
           </li>
-          <li className={active === "cart" ? "active" : ""} onClick={() => setActive("cart")}>
-            🛒 My Cart {cart.length > 0 && `(${cart.length})`}
+          <li
+            className={active === "cart" ? "active" : ""}
+            onClick={() => setActive("cart")}
+          >
+            🛒 My Cart {cartCount > 0 && `(${cartCount})`}
           </li>
-
-          <li className={active === "orders" ? "active" : ""} onClick={() => setActive("orders")}>
+          <li
+            className={active === "orders" ? "active" : ""}
+            onClick={() => setActive("orders")}
+          >
             📦 My Orders
           </li>
         </ul>
