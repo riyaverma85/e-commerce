@@ -125,6 +125,54 @@
   color: #1b5e20;
   font-weight: 500;
 }
+/* 🌿 Category Dropdown Modern Gradient */
+.search-wrapper select {
+  border: none;
+  border-radius: 25px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background: linear-gradient(90deg, #43a047, #2e7d32);
+  cursor: pointer;
+  outline: none;
+  appearance: none; /* remove default arrow */
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Custom arrow */
+.search-wrapper select::after {
+  content: "▼";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 12px;
+}
+
+/* Hover & Focus */
+.search-wrapper select:hover,
+.search-wrapper select:focus {
+  background: linear-gradient(90deg, #2e7d32, #43a047);
+  box-shadow: 0 0 8px rgba(67, 160, 71, 0.4);
+}
+
+/* Dropdown Options */
+.search-wrapper select option {
+  color: #2e7d32;
+  font-weight: 500;
+  background: #fafffa;
+}
+
+/* Small devices */
+@media (max-width: 768px) {
+  .search-wrapper select {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
 
 /* ✨ Dropdown fade animation */
 @keyframes fadeIn {
