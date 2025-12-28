@@ -11,9 +11,11 @@ import "../css/header.css";
 const Header = () => {
   const { auth, logout, cartCount, setCartCount } = useContext(AuthContext);
   const [search, setSearch] = useState('');
+  const [results, setResults] = useState([]);
   const navigate = useNavigate();
   const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
+  // Fetch cart count
   const fetchCartCount = async () => {
     if (!auth?.token) return;
     try {
@@ -30,6 +32,34 @@ const Header = () => {
     fetchCartCount();
   }, [auth]);
 
+  // Search handler with auto-suggest
+  const handleSearchChange = async (e) => {
+    const query = e.target.value;
+    setSearch(query);
+
+    if (query.trim() === '') {
+      setResults([]);
+      return;
+    }
+
+    try {
+      const res = await axios.get(`${API}/api/products?search=${encodeURIComponent(query)}`);
+      setResults(res.data.slice(0, 5)); // Show top 5 results
+    } catch (err) {
+      console.error("Search failed", err);
+      setResults([]);
+    }
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (search.trim() !== '') {
+      navigate(`/search?query=${encodeURIComponent(search)}`);
+      setSearch('');
+      setResults([]);
+    }
+  };
+
   const handleProfileClick = () => {
     if (auth && auth.user) {
       navigate(auth.user.role === 'admin' ? '/admin/dashboard' : '/add-product');
@@ -43,32 +73,47 @@ const Header = () => {
     navigate('/');
   };
 
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    if (search.trim() !== '') {
-      console.log('Searching for:', search);
-      setSearch('');
-    }
-  };
-
   return (
     <header className="header shadow-sm py-2">
       <Container fluid className="d-flex align-items-center justify-content-between flex-wrap">
+        {/* Logo */}
         <div className="d-flex align-items-center" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
           <img src={logo} alt="logo" className="header-logo" />
           <h3 className="brand-name ms-2">OrganicMart</h3>
         </div>
 
-        <form className="search-container" onSubmit={handleSearchSubmit}>
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <button type="submit"></button>
-        </form>
+        {/* Search */}
+        <div className="search-wrapper position-relative">
+          <form className="search-container" onSubmit={handleSearchSubmit}>
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={search}
+              onChange={handleSearchChange}
+            />
+            <button type="submit"></button>
+          </form>
 
+          {/* Auto-suggest dropdown */}
+          {results.length > 0 && (
+            <ul className="search-dropdown">
+              {results.map(p => (
+                <li
+                  key={p._id}
+                  onClick={() => {
+                    navigate(`/product/${p._id}`);
+                    setSearch('');
+                    setResults([]);
+                  }}
+                >
+                  {p.name} - ₹{p.price}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {/* Icons */}
         <div className="header-icons d-flex align-items-center">
           <div className="cart-icon-wrapper" onClick={() => navigate('/add-product')}>
             <FaCartArrowDown className="icon" />

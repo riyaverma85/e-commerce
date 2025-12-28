@@ -48,7 +48,7 @@ const AdminContacts = () => {
 
   return (
     <div className="admin-contact-page">
-      <h2>📬 Contact Messages</h2>
+      <h2>Contact Messages</h2>
       {messages.length === 0 ? (
         <p>No contact messages found.</p>
       ) : (

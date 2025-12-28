@@ -48,10 +48,7 @@ const DashboardHome = () => {
 
       {/* ✅ Contact Messages Card — clickable */}
       <div
-        className="card clickable"
-        onClick={() => navigate("/admin/contacts")}
-        title="View Contact Messages"
-      >
+        className="card clickable">
         <h3>Contact Messages</h3>
         <p>{stats.contacts}</p>
       </div>
