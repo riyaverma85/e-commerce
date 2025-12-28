@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import "../css/blogdetail.css"
+
 const BlogDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();

@@ -33,7 +33,7 @@ const Blog = () => {
     },
     {
       title: "Why Choose Eco-Friendly Packaging",
-      image: "https://images.unsplash.com/photo-1596909403860-bf0d3a02e2c8",
+      image: "https://media.istockphoto.com/id/537432292/photo/young-soybean-plants-growing-in-cultivated-field.jpg?s=612x612&w=0&k=20&c=i8O8R6yQ4hKzX1Ah6SJZmphvwPgnyj-f9X47NDYQOQc=",
       desc: "Reduce your carbon footprint with sustainable packaging and support a greener planet.",
       fullContent: `Eco-friendly packaging benefits:
 - Reduces plastic waste

@@ -1,21 +1,23 @@
 import React, { useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 import "../css/contact.css";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Thank you for contacting us! We'll reply soon. 🌿");
-    setFormData({ name: "", email: "", message: "" });
+    try {
+      await axios.post(`${API}/api/contact`, formData);
+      Swal.fire("✅ Message Sent!", "We'll get back to you soon.", "success");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (err) {
+      Swal.fire("❌ Error", "Failed to send message. Try again.", "error");
+    }
   };
 
   return (
@@ -64,7 +66,6 @@ const Contact = () => {
         </form>
       </div>
     </section>
-    
   );
 };
 
