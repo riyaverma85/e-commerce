@@ -111,51 +111,72 @@ const handleAddToCart = async (product) => {
 
 
   // ... your existing Home JSX (carousel, hero etc.) ...
+  // function for button clicks
+const handleShopClick = () => {
+  const token = localStorage.getItem("token") || auth?.token;
+  if (!token) {
+    Swal.fire("Please login to start shopping!");
+    navigate("/login");
+  } else {
+    navigate("/add-product"); // or /user/dashboard if that’s your route
+  }
+};
+
 
   return (
     <>
       <section className="organic-carousel">
-      <Carousel fade interval={4000} controls={true}>
-        {/* Slide 1 */}
-        <Carousel.Item>
-          <img className="carousel-image" src={ban1} alt="Fresh Organic Vegetables" />
-          <div className="carousel-overlay"></div>
-          <div className="carousel-caption-left">
-            <h1>Fresh Organic Vegetables</h1>
-            <p>
-              Eat healthy, live healthy — fresh, local, and chemical-free produce straight from farms.
-            </p>
-            <button className="carousel-btn">Shop Now</button>
-          </div>
-        </Carousel.Item>
+  <Carousel fade interval={4000} controls={true}>
+    {/* Slide 1 */}
+    <Carousel.Item>
+      <img className="carousel-image" src={ban1} alt="Fresh Organic Vegetables" />
+      <div className="carousel-overlay"></div>
+      <div className="carousel-caption-left">
+        <h1>Fresh Organic Vegetables</h1>
+        <p>
+          Eat healthy, live healthy — fresh, local, and chemical-free produce straight from farms.
+        </p>
+        {/*  Click handler added */}
+        <button className="carousel-btn" onClick={handleShopClick}>
+          Shop Now
+        </button>
+      </div>
+    </Carousel.Item>
 
-        {/* Slide 2 */}
-        <Carousel.Item>
-          <img className="carousel-image" src={ban2} alt="Natural & Chemical-Free" />
-          <div className="carousel-overlay"></div>
-          <div className="carousel-caption-left">
-            <h1>100% Natural & Chemical-Free</h1>
-            <p>
-              Pure and eco-friendly products grown with love — just the way nature intended.
-            </p>
-            <button className="carousel-btn">Explore More</button>
-          </div>
-        </Carousel.Item>
+    {/* Slide 2 */}
+    <Carousel.Item>
+      <img className="carousel-image" src={ban2} alt="Natural & Chemical-Free" />
+      <div className="carousel-overlay"></div>
+      <div className="carousel-caption-left">
+        <h1>100% Natural & Chemical-Free</h1>
+        <p>
+          Pure and eco-friendly products grown with love — just the way nature intended.
+        </p>
+        {/*  Click handler added */}
+        <button className="carousel-btn" onClick={handleShopClick}>
+          Explore More
+        </button>
+      </div>
+    </Carousel.Item>
 
-        {/* Slide 3 */}
-        <Carousel.Item>
-          <img className="carousel-image" src={ban3} alt="Healthy Lifestyle" />
-          <div className="carousel-overlay"></div>
-          <div className="carousel-caption-left">
-            <h1>Healthy Lifestyle Starts Here</h1>
-            <p>
-              Make the switch to organic — nourish your body, care for the planet.
-            </p>
-            <button className="carousel-btn">Get Started</button>
-          </div>
-        </Carousel.Item>
-      </Carousel>
-    </section>
+    {/* Slide 3 */}
+    <Carousel.Item>
+      <img className="carousel-image" src={ban3} alt="Healthy Lifestyle" />
+      <div className="carousel-overlay"></div>
+      <div className="carousel-caption-left">
+        <h1>Healthy Lifestyle Starts Here</h1>
+        <p>
+          Make the switch to organic — nourish your body, care for the planet.
+        </p>
+        {/* Click handler added */}
+        <button className="carousel-btn" onClick={handleShopClick}>
+          Get Started
+        </button>
+      </div>
+    </Carousel.Item>
+  </Carousel>
+</section>
+
     {/*============================== PRODUCTS GRID=========================================== */}
       <section className="products-section">
         <div className="container">
