@@ -1,8 +1,24 @@
-
-
 import "../css/about.css";
 import aboutbanner from "../images/aboutbanner.jpeg";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import Swal from "sweetalert2";
+
 const About = () => {
+  const { auth } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleShopClick = () => {
+    const token = auth?.token || localStorage.getItem("token");
+    if (!token) {
+      Swal.fire("Please login to shop!");
+      navigate("/login");
+    } else {
+      navigate("/add-product"); // or /shop route if you have one
+    }
+  };
+
   return (
     <section className="about-section">
       <div className="containerr">
@@ -46,7 +62,7 @@ const About = () => {
             <p>
               With OrganicMart, you get transparency, convenience, and a commitment to health. Join our community and experience the difference of real organic living.
             </p>
-            <button className="about-btn">Shop Organic Now</button>
+            <button className="about-btn" onClick={handleShopClick}>Shop Organic Now</button>
           </div>
           <div className="about-image">
             <img 
