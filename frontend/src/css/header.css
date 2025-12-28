@@ -2,7 +2,7 @@
 .header {
   background: #ffffff;
   position: relative;
-  z-index: 5000; /* Highest among all UI layers (carousel, hero etc.) */
+  z-index: 5000;
   padding: 10px 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
@@ -23,8 +23,10 @@
 /* 🔍 Search Bar */
 .search-wrapper {
   position: relative;
-  width: 280px;
-  z-index: 6000; /* ensures dropdown always appears above everything */
+  width: 320px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .search-container {
@@ -62,10 +64,42 @@
   background: #45a049;
 }
 
+/* 🧃 Category Dropdown (Modern Style) */
+.search-wrapper select {
+  border: 1px solid #c8e6c9;
+  border-radius: 25px;
+  padding: 8px 14px;
+  font-size: 14px;
+  background: #fafffa;
+  color: #2e7d32;
+  font-weight: 500;
+  outline: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  appearance: none; /* remove default arrow */
+  background-image: linear-gradient(45deg, transparent 50%, #2e7d32 50%), 
+                    linear-gradient(135deg, #2e7d32 50%, transparent 50%);
+  background-position: calc(100% - 15px) calc(1em + 2px), calc(100% - 10px) calc(1em + 2px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.search-wrapper select:hover {
+  background-color: #ecf8ec;
+  border-color: #66bb6a;
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.3);
+}
+
+.search-wrapper select:focus {
+  border-color: #43a047;
+  box-shadow: 0 0 8px rgba(67, 160, 71, 0.4);
+  color: #1b5e20;
+}
+
 /* 🔽 Search Dropdown (Auto-suggest) */
 .search-dropdown {
   position: absolute;
-  top: 105%;
+  top: 110%;
   left: 0;
   right: 0;
   background: #fff;
@@ -73,12 +107,11 @@
   border-radius: 10px;
   max-height: 250px;
   overflow-y: auto;
-  z-index: 9999; /* 👈 stays above carousel/hero */
+  z-index: 9999;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
   animation: fadeIn 0.15s ease-in-out;
 }
 
-/* Dropdown items */
 .search-dropdown li {
   padding: 10px 14px;
   cursor: pointer;
@@ -93,7 +126,7 @@
   font-weight: 500;
 }
 
-/* ✨ Subtle dropdown fade animation */
+/* ✨ Dropdown fade animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -119,7 +152,6 @@
   transform: scale(1.1);
 }
 
-/* Cart Count Badge */
 .cart-icon-wrapper {
   position: relative;
   cursor: pointer;
@@ -151,6 +183,12 @@
   .search-wrapper {
     width: 100%;
     margin-top: 10px;
+    justify-content: center;
+  }
+
+  .search-wrapper select {
+    padding: 7px 12px;
+    font-size: 13px;
   }
 
   .header-icons {
