@@ -5,18 +5,41 @@ import "../css/contact.css";
 
 const Contact = () => {
   const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
 
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.name || !formData.email || !formData.message) {
+      Swal.fire("⚠️ All fields are required!");
+      return;
+    }
+
     try {
-      await axios.post(`${API}/api/contact`, formData);
-      Swal.fire("✅ Message Sent!", "We'll get back to you soon.", "success");
-      setFormData({ name: "", email: "", message: "" });
+      setLoading(true);
+      const res = await axios.post(`${API}/api/contact`, formData);
+
+      if (res.data.success) {
+        Swal.fire("✅ Message Sent!", "We'll reply soon. 🌿", "success");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        Swal.fire("❌ Failed", res.data.message || "Something went wrong", "error");
+      }
     } catch (err) {
-      Swal.fire("❌ Error", "Failed to send message. Try again.", "error");
+      Swal.fire("❌ Error", "Unable to send message.", "error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -62,7 +85,9 @@ const Contact = () => {
             onChange={handleChange}
             required
           ></textarea>
-          <button type="submit">Send Message 🌱</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "Sending..." : "Send Message 🌱"}
+          </button>
         </form>
       </div>
     </section>
