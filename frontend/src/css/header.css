@@ -1,87 +1,13 @@
-
+/* 🌿 Header Wrapper */
 .header {
   background: #ffffff;
-  z-index: 1000;
-}
-.header-logo {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-}
-
-.brand-name {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #2d572c;
-}
-
-.search-container {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ddd;
-  border-radius: 30px;
-  padding: 5px 10px;
-  width: 280px;
-  transition: 0.3s ease;
-}
-
-.search-container input {
-  border: none;
-  outline: none;
-  width: 100%;
-  font-size: 14px;
-}
-
-.search-container button {
-  border: none;
-  background: #2d572c;
-  color: #fff;
-  border-radius: 50%;
-  padding: 6px 10px;
-  margin-left: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.search-container button:hover {
-  background: #45a049;
-}
-
-.header-icons .icon {
-  font-size: 1.8rem;
-  margin-left: 18px;
-  color: #2d572c;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.header-icons .icon:hover {
-  color: #45a049;
-  transform: scale(1.1);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .search-container {
-    width: 100%;
-    margin-top: 10px;
-  }
-
-  .header {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .header-icons {
-    margin-top: 10px;
-  }
-}
-.header {
-  background: #ffffff;
-  z-index: 1000;
+  position: relative;
+  z-index: 5000; /* Highest among all UI layers (carousel, hero etc.) */
   padding: 10px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
+/* 🌱 Logo + Brand */
 .header-logo {
   width: 60px;
   height: 60px;
@@ -89,9 +15,16 @@
 }
 
 .brand-name {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 600;
   color: #2d572c;
+}
+
+/* 🔍 Search Bar */
+.search-wrapper {
+  position: relative;
+  width: 280px;
+  z-index: 6000; /* ensures dropdown always appears above everything */
 }
 
 .search-container {
@@ -100,8 +33,9 @@
   border: 1px solid #ddd;
   border-radius: 30px;
   padding: 5px 10px;
-  width: 280px;
-  transition: 0.3s ease;
+  width: 100%;
+  background: #fff;
+  transition: all 0.3s ease;
 }
 
 .search-container input {
@@ -109,7 +43,8 @@
   outline: none;
   width: 100%;
   font-size: 14px;
-  padding: 5px;
+  padding: 5px 10px;
+  background: transparent;
 }
 
 .search-container button {
@@ -120,19 +55,63 @@
   padding: 6px 10px;
   margin-left: 5px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background 0.3s;
 }
 
 .search-container button:hover {
   background: #45a049;
 }
 
+/* 🔽 Search Dropdown (Auto-suggest) */
+.search-dropdown {
+  position: absolute;
+  top: 105%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 9999; /* 👈 stays above carousel/hero */
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.15s ease-in-out;
+}
+
+/* Dropdown items */
+.search-dropdown li {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  transition: background 0.2s, color 0.2s;
+}
+
+.search-dropdown li:hover {
+  background-color: #f0fdf4;
+  color: #1b5e20;
+  font-weight: 500;
+}
+
+/* ✨ Subtle dropdown fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🛒 Icons Section */
 .header-icons .icon {
   font-size: 1.8rem;
   margin-left: 18px;
   color: #2d572c;
   cursor: pointer;
-  transition: 0.3s;
+  transition: color 0.3s, transform 0.3s;
 }
 
 .header-icons .icon:hover {
@@ -140,26 +119,7 @@
   transform: scale(1.1);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .search-container {
-    width: 100%;
-    margin: 10px 0;
-  }
-
-  .header-icons {
-    margin-top: 10px;
-  }
-
-  .header-icons .icon {
-    margin-left: 10px;
-  }
-}
+/* Cart Count Badge */
 .cart-icon-wrapper {
   position: relative;
   cursor: pointer;
@@ -169,7 +129,7 @@
   position: absolute;
   top: -5px;
   right: -8px;
-  background: #dc3545; /* red */
+  background: #dc3545;
   color: white;
   font-size: 12px;
   font-weight: bold;
@@ -178,29 +138,26 @@
   min-width: 18px;
   text-align: center;
   line-height: 1;
-  box-shadow: 0 0 3px rgba(0,0,0,0.3);
-}
-.search-wrapper {
-  position: relative;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
-.search-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: #fff;
-  border: 1px solid #ddd;
-  z-index: 10;
-  max-height: 250px;
-  overflow-y: auto;
-}
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+  }
 
-.search-dropdown li {
-  padding: 8px 12px;
-  cursor: pointer;
-}
+  .search-wrapper {
+    width: 100%;
+    margin-top: 10px;
+  }
 
-.search-dropdown li:hover {
-  background-color: #f0f0f0;
+  .header-icons {
+    margin-top: 10px;
+  }
+
+  .header-icons .icon {
+    margin-left: 10px;
+  }
 }
