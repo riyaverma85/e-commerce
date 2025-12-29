@@ -11,7 +11,7 @@ import Upperimage from "../images/fruits.jpg";
 import hero from "../images/about.webp";
 import image from "../images/blank.jpg";
 
-import { FaLeaf, FaSeedling, FaAppleAlt } from "react-icons/fa";
+// import { FaLeaf, FaSeedling, FaAppleAlt } from "react-icons/fa";
 import { AuthContext } from "../context/AuthContext";
 import ProductCard from "../components/ProductCard";
 import "../css/home.css";
