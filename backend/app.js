@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const app = express();
 const connectDB = require("./config/db");
 const { createAdminIfNotExists } = require("./controllers/authController");
 
@@ -12,7 +13,7 @@ const orderRoutes = require("./routes/orderRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 
-const app = express();
+
 
 // ✅ CORS configuration (important)
 app.use(
