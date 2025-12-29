@@ -18,7 +18,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      // "http://localhost:5173", // local dev
+      "http://localhost:5173", // local dev
       "https://organicstore-omega.vercel.app", // your live frontend URL
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
