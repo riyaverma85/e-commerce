@@ -19,7 +19,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173", // local dev
-      "https://organicmart.vercel.app", // your live frontend URL
+      "https://organicstore-omega.vercel.app/", // your live frontend URL
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
