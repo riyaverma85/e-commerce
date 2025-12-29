@@ -4,7 +4,7 @@ const cors = require("cors");
 const connectDB = require("./config/db");
 const { createAdminIfNotExists } = require("./controllers/authController");
 
-// Routes import
+// ✅ Import all routes
 const authRoutes = require("./routes/authRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const productRoutes = require("./routes/productRoutes");
@@ -14,14 +14,15 @@ const contactRoutes = require("./routes/contactRoutes");
 
 const app = express();
 
-// ✅ CORS Configuration
+// ✅ CORS configuration (important)
 app.use(
   cors({
     origin: [
-      "http://localhost:5173", // for local development
-      "https://organicmart.vercel.app", // your Vercel frontend
+      "http://localhost:5173", // local dev
+      "https://organicmart.vercel.app", // your live frontend URL
     ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
@@ -29,11 +30,15 @@ app.use(
 // ✅ Middleware
 app.use(express.json());
 
-// ✅ Database connect + admin check
+// ✅ Connect to MongoDB and create admin if not exists
 connectDB().then(() => createAdminIfNotExists());
 
-// ✅ Routes
-app.get("/", (req, res) => res.send("OrganicMart API running 🚀"));
+// ✅ Test route
+app.get("/", (req, res) => {
+  res.send("🚀 OrganicMart backend running successfully!");
+});
+
+// ✅ API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/products", productRoutes);
@@ -41,6 +46,13 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/contact", contactRoutes);
 
-// ✅ Server Start
+// ✅ Handle unknown routes
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
+
+// ✅ Start the server
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+});
