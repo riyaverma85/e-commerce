@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const Contact = require("../models/Contact");
-const { protect, adminOnly } = require("../middleware/authMiddleware");
+const { protect, adminOnly } = require("../middlewares/authMiddleware");
 
 // 📬 USER — Send message + auto-reply
 router.post("/", async (req, res) => {

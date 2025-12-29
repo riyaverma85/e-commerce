@@ -4,6 +4,7 @@ const { adminDashboard } = require("../controllers/authController");
 const User = require("../models/User");
 const Product = require("../models/Product");
 const Order = require("../models/Order");
+const Contact =require("../models/Contact")
 
 // ✅ Admin Dashboard summary
 router.get("/dashboard", protect, adminOnly, adminDashboard);
@@ -53,7 +54,8 @@ router.get("/stats", protect, adminOnly, async (req, res) => {
   const users = await User.countDocuments();
   const products = await Product.countDocuments();
   const orders = await Order.countDocuments();
-  res.json({ users, products, orders });
+  const contacts=await Contact.countDocuments();
+  res.json({ users, products, orders,contacts });
 });
 
 module.exports = router;

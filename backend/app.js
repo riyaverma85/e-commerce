@@ -29,9 +29,5 @@ app.use('/api/orders',orderRoutes)
 app.use("/api/cart", cartRoutes);
 app.use("/api/contact", contactRoutes);
 
-
-console.log("Cloudinary Config:", process.env.CLOUDINARY_CLOUD_NAME);
-
-
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log('Server running on', PORT));
