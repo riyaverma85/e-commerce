@@ -1,4 +1,6 @@
+
 require("dotenv").config();
+console.log("Admin ENV check:", process.env.ADMIN_EMAIL, process.env.ADMIN_PASSWORD);
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -16,17 +18,7 @@ const contactRoutes = require("./routes/contactRoutes");
 
 
 // ✅ CORS configuration (important)
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173", // local dev
-      "https://organicstore-omega.vercel.app", // your live frontend URL
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  })
-);
+app.use(cors());
 
 
 // ✅ Middleware
