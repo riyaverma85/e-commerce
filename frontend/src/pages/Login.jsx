@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext,useEffect } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate, useLocation, Link } from "react-router-dom";
@@ -15,7 +15,6 @@ const Login = () => {
 
   const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
-  // 👇 Target redirect after login
   const redirectPath = location.state?.from || "/add-product";
 
   const submit = async (e) => {
@@ -23,7 +22,18 @@ const Login = () => {
     setErr("");
 
     try {
-      const res = await axios.post(`${API}/api/auth/login`, { email, password });
+      // ✅ Added headers for Render/production backend
+      const res = await axios.post(
+        `${API}/api/auth/login`,
+        { email, password },
+        // {
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   withCredentials: true, // optional if your backend uses cookies
+        // }
+      );
+
       login(res.data.token, res.data.user);
 
       Swal.fire({
@@ -34,7 +44,6 @@ const Login = () => {
         showConfirmButton: false,
       });
 
-      // Redirect to the original page
       if (res.data.user.role === "admin") {
         navigate("/admin/dashboard");
       } else {
@@ -64,6 +73,7 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            autoComplete="email" // optional, better UX
           />
           <input
             type="password"
@@ -71,6 +81,7 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            autoComplete="current-password"
           />
           <button type="submit">Login</button>
         </form>
